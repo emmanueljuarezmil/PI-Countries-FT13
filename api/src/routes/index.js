@@ -29,89 +29,47 @@ router.get('/countries', async (req,res,next) => {
     var countries
 
     try {
-        if(!filterOnFront) {
-            if(name) {
-                countries = await Country.findAll({
-                    where: {name: {[Op.iLike]: `%${name}%`}},
-                    include: {
-                        model: Activity,
-                        attributes: ['id'],
-                        through: {
-                        attributes: []
-                        }
-                    },
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
-                    },
-                    offset: (page - 1)*10,
-                    limit: page*10,
-                    order: [[orderBy, orderType]]
-                })
-            }
-            else {
-                countries = await Country.findAll({
-                    include: {
-                        model: Activity,
-                        attributes: ['id'],
-                        through: {
-                        attributes: []
-                        }
-                    },
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
-                    },
-                    offset: (page - 1)*10,
-                    limit: page*10,
-                    order: [[orderBy, orderType]]
-                })
-            }
-    
-            if(countries.length) {
-                return res.json(countries)
-            }
-            else {
-                return res.status(204).send('No hay paises para mostrar')
-            }
+        if(name) {
+            countries = await Country.findAll({
+                where: {name: {[Op.iLike]: `%${name}%`}},
+                include: {
+                    model: Activity,
+                    attributes: ['id'],
+                    through: {
+                    attributes: []
+                    }
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                },
+                offset: filterOnFront ? null : (page - 1)*10,
+                limit: filterOnFront ? null : 10,
+                order: [[orderBy, orderType]]
+            })
         }
-        else{
-            if(name) {
-                countries = await Country.findAll({
-                    where: {name: {[Op.iLike]: `%${name}%`}},
-                    include: {
-                        model: Activity,
-                        attributes: ['id'],
-                        through: {
-                        attributes: []
-                        }
-                    },
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
-                    },
-                    order: [[orderBy, orderType]]
-                })
-            }
-            else {
-                countries = await Country.findAll({
-                    include: {
-                        model: Activity,
-                        attributes: ['id'],
-                        through: {
-                        attributes: []
-                        }
-                    },
-                    attributes: {
-                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
-                    },
-                    order: [[orderBy, orderType]]
-                })
-            }
-    
-            if(countries.length) {
-                return res.json(countries)
-            }
-            else {
-                return res.status(204).send('No hay paises para mostrar')
-            }
+        else {
+            countries = await Country.findAll({
+                include: {
+                    model: Activity,
+                    attributes: ['id'],
+                    through: {
+                    attributes: []
+                    }
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                },
+                offset: filterOnFront ? null : (page - 1)*10,
+                limit: filterOnFront ? null : 10,
+                order: [[orderBy, orderType]]
+            })
+        }
+
+        if(countries.length) {
+            return res.json(countries)
+        }
+        else {
+            return res.status(204).send('No hay paises para mostrar')
         }
     } catch(err) {
         console.error(err)
