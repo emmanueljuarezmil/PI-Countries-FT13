@@ -2,6 +2,7 @@ const { Router } = require('express');
 const express = require('express');
 const axios = require('axios')
 const {Country, Activity} = require('../db')
+const { Op } = require('sequelize')
 
 
 // Importar todos los routers;
@@ -15,131 +16,132 @@ router.use(express.json())
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-
-
-//                          BACK
-
-// [BACK] GET /countries:
-// X En una primera instancia deberán traer todos los países desde restcountries y guardarlos en su propia base de datos y luego ya utilizarlos desde allí (Debe almacenar solo los datos necesarios para la ruta principal)
-// Obtener un listado de los primeros 10 países
-
-// [BACK] GET /countries?name="...":
-// Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
-// Si no existe ningún país mostrar un mensaje adecuado
-
-
-//                          FRONT
-
-// Ruta principal: debe contener
-// [BACK] Input de búsqueda para encontrar países por nombre
-// [FRONT] Área donde se verá el listado de países. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta GET /countries y deberá mostrar su:
-// Imagen de la bandera
-// Nombre
-// Continente
-// 
-// [FRONT] Botones/Opciones para filtrar por continente y por tipo de actividad turística
-// [BACK] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los países por orden alfabético y por cantidad de población
-// [FRONT] Paginado para ir buscando y mostrando los siguientes paises
-
-
-// vamo con los casos:
-
-// default: mandar solo los primeros 10 paises, sin filtro ni ordenamiento ni nada
-// ordenamiento desde el back: mandar todo ordenado por nombre del pais alfabetico o por cantidad de poblacion (asc o desc)
-// filtrado desde el front: mandar todo y ahi filtrar o paginar desde el front
-
-
-// mandar entonces desde el back
-
-// Pais: id pais, nombre, imagen de la bandera, continente, poblacion, ids de actividades relacionadas
-// Actividades: id actividad, nombre
-
-
-
 router.get('/countries', async (req,res,next) => {
-    const {name} = req.query
-    const {pagedOrOrder, orderBy, orderType} = req.body
-    if(!name && !pagedOrOrder) {
-        // no hay nombre para buscar pais, ni variable de paginado ordenado, mando los primeros 10
-        const countries = await Country.findAll({limit: 10, attributes:['id', 'name', 'flag', 'continent', 'poblation']})
-        return res.json(countries)
+    var {name, page = 1} = req.query
+    var {filterOnFront = false, orderBy = 'name', orderType = 'ASC'} = req.body
+
+    if(name) name = decodeURI(name)
+
+    if((orderBy !== 'name' && orderBy !== 'poblation') || (orderType !== 'ASC' && orderType !== 'DESC') || isNaN(page)) {
+        return res.status(400).send('Los parametros enviados son incorrectos, no te hagas el piola')
     }
-    if(!name) {
-        // no hay nombre de pais pero si hay variable de que hay paginado u ordenado
+
+    var countries
+
+    try {
+        if(name) {
+            countries = await Country.findAll({
+                where: {name: {[Op.iLike]: `%${name}%`}},
+                include: {
+                    model: Activity,
+                    attributes: ['id'],
+                    through: {
+                    attributes: []
+                    }
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                },
+                offset: filterOnFront ? null : (page - 1)*10,
+                limit: filterOnFront ? null : 10,
+                order: [[orderBy, orderType]]
+            })
+        }
+        else {
+            countries = await Country.findAll({
+                include: {
+                    model: Activity,
+                    attributes: ['id'],
+                    through: {
+                    attributes: []
+                    }
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                },
+                offset: filterOnFront ? null : (page - 1)*10,
+                limit: filterOnFront ? null : 10,
+                order: [[orderBy, orderType]]
+            })
+        }
+
+        if(countries.length) {
+            return res.json(countries)
+        }
+        else {
+            return res.status(204).send('No hay paises para mostrar')
+        }
+    } catch(err) {
+        console.error(err)
+        return res.status(400).send('Se pudrió todo amigo, algo pasó')
     }
-    if(!pagedOrOrder) {
-        // hay nombre de pais para buscar, pero no variable de que hay paginado u ordenado
-    }
-    res.send('ok')
 
 })
-
-
-
-
-
-
-//                          BACK
-
-// [BACK] GET /countries/{idPais}:
-// Obtener el detalle de un país en particular
-// Debe traer solo los datos pedidos en la ruta de detalle de país
-// Incluir los datos de las actividades turísticas correspondientes
-
-
-//                          FRONT
-
-// Ruta de detalle de país: debe contener
-// [ ] Los campos mostrados en la ruta principal para cada país (imagen de la bandera, nombre, código de país de 3 letras y continente)
-// [ ] Código de país de 3 letras (id)
-// [ ] Capital
-// [ ] Subregión
-// [ ] Área (Mostrarla en km2 o millones de km2)
-// [ ] Población
-// [ ] Actividades turísticas con toda su información asociada
 
 
 router.get('/countries/:id', async (req,res,next) => {
     const {id} = req.params
-    if(!id) {
-        return res.status(404).send('Ups, el id no es valido')
+    try {
+        var country = await Country.findAll({
+            where: {id},
+            include: {
+                model: Activity,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
+                through: {
+                  attributes: []
+                }
+            },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
+        })
+        if(country.length){
+            return res.json(country)
+        }
+        return res.status(204).send('No se encontro el pais :(')
     }
-    const country = await Country.findByPk(id)
-    return res.send(country)
+    catch(err){
+        console.error(err)
+        return res.status(400).send('Algo malió sal')
+    }
 })
 
 
 
 
 
+const validateActivity = function(name, difficult, duration, season, countriesIds) {
+    const seasons = ['Verano', 'Otoño', 'Primavera', 'Invierno']
+    if(!name || typeof name !== 'string') return true
+    if(difficult && (typeof difficult !== 'number' || difficult < 1 || difficult > 5)) return true
+    if(duration && (typeof duration !== 'number' || duration < 0)) return true
+    if(season && !seasons.includes(season)) return true
+    if(!Array.isArray(countriesIds) || countriesIds.length === 0) return true
+    return false
+}
 
-//                          BACK
-
-// [BACK] POST /activity:
-// Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
-// Crea una actividad turística en la base de datos
-
-
-//                          FRONT
-
-// Ruta de creación de actividad turística: debe contener
-// [ ] Un formulario controlado con los siguientes campos
-// Nombre
-// Dificultad
-// Duración
-// Temporada
-// [ ] Posibilidad de seleccionar/agregar varios países en simultaneo
-// [ ] Botón/Opción para crear una nueva actividad turística
-
-
-router.post('/activity', (req,res,next) => {
-    const {name, difficult, duration, season, description, countriesId} = req.body
-    if(!name || !difficult || typeof difficult !== 'number' || difficult > 5 || difficult < 1 || typeof duration !== 'number' || !duration || !countriesId.length) {
-        return res.status(400).send('Datos incorrectos')
-    }
+router.post('/activity', async (req,res,next) => {
+    var {name, difficult, duration, season, description, countriesIds} = req.body
     if(!season) season = null
     if(!description) description = null
-    
+    if(!duration) duration = null
+    if(!difficult) difficult = null
+    if(validateActivity(name, difficult, duration, season, countriesIds)) {
+        return res.status(400).send('Datos incorrectos')
+    }
+    var activity
+    try {
+        activity = await Activity.create({name, difficult, duration, season, description})
+        await activity.setCountries(countriesIds)
+    }
+    catch(err) {
+        console.error(err)
+        activity.destroy()
+        return res.status(400).send('Datos incorrectos')
+    }
+    return res.json(activity)
 })
 
 
