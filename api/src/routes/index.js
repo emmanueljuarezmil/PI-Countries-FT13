@@ -18,7 +18,7 @@ router.use(express.json())
 
 router.get('/countries', async (req,res,next) => {
     var {name, page = 1} = req.query
-    var {filterOnFront, orderBy = 'name', orderType = 'ASC'} = req.body
+    var {filterOnFront = false, orderBy = 'name', orderType = 'ASC'} = req.body
 
     if(name) name = decodeURI(name)
 
@@ -33,7 +33,16 @@ router.get('/countries', async (req,res,next) => {
             if(name) {
                 countries = await Country.findAll({
                     where: {name: {[Op.iLike]: `%${name}%`}},
-                    include: Activity,
+                    include: {
+                        model: Activity,
+                        attributes: ['id'],
+                        through: {
+                        attributes: []
+                        }
+                    },
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                    },
                     offset: (page - 1)*10,
                     limit: page*10,
                     order: [[orderBy, orderType]]
@@ -41,7 +50,16 @@ router.get('/countries', async (req,res,next) => {
             }
             else {
                 countries = await Country.findAll({
-                    include: Activity,
+                    include: {
+                        model: Activity,
+                        attributes: ['id'],
+                        through: {
+                        attributes: []
+                        }
+                    },
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                    },
                     offset: (page - 1)*10,
                     limit: page*10,
                     order: [[orderBy, orderType]]
@@ -59,13 +77,31 @@ router.get('/countries', async (req,res,next) => {
             if(name) {
                 countries = await Country.findAll({
                     where: {name: {[Op.iLike]: `%${name}%`}},
-                    include: Activity,
+                    include: {
+                        model: Activity,
+                        attributes: ['id'],
+                        through: {
+                        attributes: []
+                        }
+                    },
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                    },
                     order: [[orderBy, orderType]]
                 })
             }
             else {
                 countries = await Country.findAll({
-                    include: Activity,
+                    include: {
+                        model: Activity,
+                        attributes: ['id'],
+                        through: {
+                        attributes: []
+                        }
+                    },
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                    },
                     order: [[orderBy, orderType]]
                 })
             }
@@ -88,9 +124,20 @@ router.get('/countries', async (req,res,next) => {
 router.get('/countries/:id', async (req,res,next) => {
     const {id} = req.params
     try {
-        const country = await Country.findAll({
+        var country = await Country.findAll({
             where: {id},
-            include: Activity,
+            include: {
+                model: Activity,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
+                through: {
+                  attributes: []
+                }
+            },
+            attributes: {
+                exclude: ['createdAt', 'updatedAt']
+            }
         })
         if(country.length){
             return res.json(country)
