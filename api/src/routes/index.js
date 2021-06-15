@@ -1,60 +1,142 @@
 const { Router } = require('express');
 const express = require('express');
+const axios = require('axios')
+const {Country, Activity} = require('../db')
+const { Op } = require('sequelize')
+
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {Country, Activity} = require('../db')
-const axios = require('axios')
 
 
 const router = Router();
+router.use(express.json())
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.use(express.json())
 
-var swap = true
+router.get('/countries', async (req,res,next) => {
+    var {name, page = 1} = req.query
+    var {filterOnFront, orderBy = 'name', orderType = 'ASC'} = req.body
 
-async function getCountries(req,res,next) {
-    if(swap) {
-        axios.get('https://restcountries.eu/rest/v2/all').then(response => {
-            response.data.forEach(country => 
-                Country.create({id: country.alpha3Code,
-                    name: country.name,
-                    flag: country.flag,
-                    continent: country.region,
-                    capital: country.capital,
-                    subregion: country.subregion,
-                    area: country.area,
-                    poblation: country.population
-                })
-            )
-        }).catch(err => console.log(err))
-        swap = false
-        console.log('ciudades cargadas')
+    if(name) name = decodeURI(name)
+
+    if((orderBy !== 'name' && orderBy !== 'poblation') || (orderType !== 'ASC' && orderType !== 'DESC') || isNaN(page)) {
+        return res.status(400).send('Los parametros enviados son incorrectos, no te hagas el piola')
     }
-    next()
-}
 
+    var countries
 
+    try {
+        if(!filterOnFront) {
+            if(name) {
+                countries = await Country.findAll({
+                    where: {name: {[Op.iLike]: `%${name}%`}},
+                    include: Activity,
+                    offset: (page - 1)*10,
+                    limit: page*10,
+                    order: [[orderBy, orderType]]
+                })
+            }
+            else {
+                countries = await Country.findAll({
+                    include: Activity,
+                    offset: (page - 1)*10,
+                    limit: page*10,
+                    order: [[orderBy, orderType]]
+                })
+            }
+    
+            if(countries.length) {
+                return res.json(countries)
+            }
+            else {
+                return res.status(204).send('No hay paises para mostrar')
+            }
+        }
+        else{
+            if(name) {
+                countries = await Country.findAll({
+                    where: {name: {[Op.iLike]: `%${name}%`}},
+                    include: Activity,
+                    order: [[orderBy, orderType]]
+                })
+            }
+            else {
+                countries = await Country.findAll({
+                    include: Activity,
+                    order: [[orderBy, orderType]]
+                })
+            }
+    
+            if(countries.length) {
+                return res.json(countries)
+            }
+            else {
+                return res.status(204).send('No hay paises para mostrar')
+            }
+        }
+    } catch(err) {
+        console.error(err)
+        return res.status(400).send('Se pudrió todo amigo, algo pasó')
+    }
 
-router.get('/countries', getCountries, async (req,res,next) => {
-    const countries = await Country.findAll()
-    return res.send(countries)
 })
+
 
 router.get('/countries/:id', async (req,res,next) => {
     const {id} = req.params
-    if(!id) {
-        return res.status(404).send('Ups, el id no es valido')
+    try {
+        const country = await Country.findAll({
+            where: {id},
+            include: Activity,
+        })
+        if(country.length){
+            return res.json(country)
+        }
+        return res.status(204).send('No se encontro el pais :(')
     }
-    const country = await Country.findByPk(id)
-    return res.send(country)
+    catch(err){
+        console.error(err)
+        return res.status(400).send('Algo malió sal')
+    }
 })
 
-router.get('/countries', (req,res,next) => {
-})
 
-router.post('/activity', (req,res,next) => {
+
+
+
+const validateActivity = function(name, difficult, duration, season, countriesIds) {
+    const seasons = ['Verano', 'Otoño', 'Primavera', 'Invierno']
+    if(!name || typeof name !== 'string') return true
+    if(difficult && (typeof difficult !== 'number' || difficult < 1 || difficult > 5)) return true
+    if(duration && (typeof duration !== 'number' || duration < 0)) return true
+    if(season && !seasons.includes(season)) return true
+    if(!Array.isArray(countriesIds) || countriesIds.length === 0) return true
+    return false
+}
+
+router.post('/activity', async (req,res,next) => {
+    var {name, difficult, duration, season, description, countriesIds} = req.body
+    if(!season) season = null
+    if(!description) description = null
+    if(!duration) duration = null
+    if(!difficult) difficult = null
+    if(validateActivity(name, difficult, duration, season, countriesIds)) {
+        return res.status(400).send('Datos incorrectos')
+    }
+    var activity
+    try {
+        activity = await Activity.create({name, difficult, duration, season, description})
+        await activity.setCountries(countriesIds)
+    }
+    catch(err) {
+        console.error(err)
+        activity.destroy()
+        return res.status(400).send('Datos incorrectos')
+    }
+    return res.json(activity)
 })
 
 

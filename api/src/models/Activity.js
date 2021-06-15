@@ -5,18 +5,20 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('activity', {
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     difficult: {
       type: DataTypes.ENUM('1','2','3','4','5')
-      // type: DataTypes.INTEGER
     },
     duration: {
       type: DataTypes.INTEGER
     },
     season: {
-      type: DataTypes.ENUM('verano', 'otoño', 'primavera', 'invierno')
-      // type: DataTypes.INTEGER
+      type: DataTypes.ENUM('Verano', 'Otoño', 'Primavera', 'Invierno')
+    },
+    description: {
+      type: DataTypes.TEXT,
     }
   });
 };
