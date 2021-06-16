@@ -3,7 +3,7 @@ const {Country, Activity} = require('../db')
 module.exports = async function (req,res,next) {
     const {id} = req.params
     try {
-        var country = await Country.findAll({
+        const country = await Country.findAll({
             where: {id},
             include: {
                 model: Activity,
@@ -21,10 +21,9 @@ module.exports = async function (req,res,next) {
         if(country.length){
             return res.json(country)
         }
-        return res.status(204).send('No se encontro el pais :(')
+        next({status: 404, message: 'No se encontró ningún pais con el id indicado'})
     }
     catch(err){
-        console.error(err)
-        return res.status(400).send('Algo malió sal')
+        next(err)
     }
 }
