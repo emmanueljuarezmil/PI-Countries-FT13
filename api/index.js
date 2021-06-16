@@ -23,6 +23,7 @@ const { getCountriesInitial } = require('./src/controllers')
 
 // Syncing all the models at once.
 conn.sync({ force: true })
+.then(() => console.log('Base de datos conectada'))
 .then(() => getCountriesInitial())
 .then(() => {
   server.listen(3001, () => {
