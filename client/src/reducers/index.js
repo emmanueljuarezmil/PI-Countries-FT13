@@ -1,12 +1,23 @@
-import {} from '../actions'
+import {} from '../action-types'
+import {combineReducers} from 'redux'
 
-const initialState = {
-    activities: [],
-    countries: [],
-    countryDetail: {}
-};
 
-function rootReducer(state = initialState, action) {
+function activities(state = [],action) {
+    switch(action.type) {
+        default:
+            return state
+    }
 }
-  
+
+function page(state = 1,action) {
+    switch(action.type) {
+        default:
+            return state
+    }
+}
+
+
+
+let rootReducer = combineReducers({activities, page})
+
 export default rootReducer;

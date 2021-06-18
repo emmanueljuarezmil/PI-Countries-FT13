@@ -3,7 +3,7 @@ import React from 'react'
 function SearchBar() {
     return (
         <div>
-            <h1>search bar</h1>
+            <h1>Barra de busqueda</h1>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Paginated() {
+function CountryCard() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function Paginated() {
     )
 }
 
-export default Paginated
+export default CountryCard

@@ -1,13 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 
-export default function LandingPage() {
+
+function LandingPage() {
     return (
         <div>
             <h1>
-                Mensaje de bienvenida
+                Mensaje de bienvenida + imagen
             </h1>
             <Link to='/home'>Ingresar</Link>
         </div>
     )
 }
+
+const mapDispatchToProps = {
+    getCountries
+}
+
+export default connect(null, mapDispatchToProps)(LandingPage)
