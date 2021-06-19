@@ -2,11 +2,9 @@ const {Country, Activity} = require('../db')
 const { Op } = require('sequelize')
 
 module.exports = async function (req,res,next) {
-    var {name} = req.query
-    var {orderBy = 'name', orderType = 'ASC'} = req.body
-    console.log(name)
+    var {name, orderBy = 'name', orderType = 'ASC'} = req.query
+    console.log(req.query)
     if(name) name = decodeURI(name)
-    console.log(name)
     if((orderBy !== 'name' && orderBy !== 'poblation') || (orderType !== 'ASC' && orderType !== 'DESC')) {
         // return res.status(400).send('Los parametros enviados son incorrectos, no te hagas el piola')
         next({status: 400, message: 'Los parametros enviados son incorrectos'})
