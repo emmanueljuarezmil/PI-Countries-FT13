@@ -1,23 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios'
+import { addActivity } from '../actions';
 
-function ActivityForm({countries}) {
+function ActivityForm({countries, addActivity}) {
     const [input, setInput] = useState({
         name: '',
         difficult: '',
         season: '',
         description: '',
+        duration: ''
       });
 
     const [countriesIds, setCountriesIds] = useState([])
     
     const [error, setError] = useState('Debes ingresar una actividad y al menos un pais');
 
-    function validateForm() {
-        if(!input.name.length || countriesIds.length) setError('Debes ingresar una actividad y al menos un pais')
+    useEffect(() => {
+        if(!input.name.length || !countriesIds.length) setError('Debes ingresar al menos el nombre de la actividad y un pais')
         if(input.name.length && countriesIds.length) setError('')
-    }
+    },[input, countriesIds])
 
     function handleChange(e) {
         e.preventDefault()
@@ -26,14 +28,12 @@ function ActivityForm({countries}) {
             ...input,
             [name]: value
         });
-        validateForm()
     }
 
     const countryIdSelect = useRef(null)
     
     function removeCountryId(countryId) {
         setCountriesIds(countriesIds.filter((el) => el[0] !== countryId))
-        validateForm()
     }
 
     const addCountry = (e) => {
@@ -48,35 +48,46 @@ function ActivityForm({countries}) {
             setCountriesIds([...countriesIds, countryToAdd])
         }
         countryIdSelect.current.value = ""
-        validateForm()
     }
 
-    function submitForm() {
-        const body = {
+    async function submitForm(e) {
+        e.preventDefault()
+        const data = {
             name: input.name,
-            difficult: input.difficult,
+            difficult: parseInt(input.difficult),
             season: input.season,
+            duration: parseInt(input.duration),
             description: input.description,
             countriesIds: countriesIds.map(el => el[0])
         }
-        axios.post('http://localhost:3001/activity', body)
+        const response = await axios({
+            method: 'POST',
+            url: 'http://localhost:3001/activity',
+            data
+        })
+        var activity = response.data
+        activity.countries = activity.countries.map(el => el.id)
+        console.log(activity)
+        addActivity(activity)
+        setInput({name: '', difficult: '', season: '', description: '', duration: ''})  
+        setCountriesIds([])
     }
 
     return (
         <div>
-            <form onSubmit={(e) => {
-                e.preventDefault()
-                submitForm()}}>
+            <form onSubmit={(e) => {submitForm(e)}}>
                 <label htmlFor="name">Nombre de la actividad:</label>
                 <input type="text" name="name" value={input.name} onChange={handleChange}/>
+                <label htmlFor="name">Duracion en minutos de la actividad:</label>
+                <input type="number" name="duration" value={input.duration} onChange={handleChange} min="0"/>
                 <label htmlFor="difficult">Dificultad:</label>
                 <select name="difficult" value={input.difficult} onChange={handleChange}>
                     <option></option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option value="1">Muy fácil</option>
+                    <option value="2">Fácil</option>
+                    <option value="3">Intermedia</option>
+                    <option value="4">Dificil</option>
+                    <option value="5">Muy dificil</option>
                 </select>
                 <label htmlFor="season">Temporada:</label>
                 <select name="season" value={input.season} onChange={handleChange}>
@@ -89,7 +100,7 @@ function ActivityForm({countries}) {
                 <label htmlFor="description">Descripción de la actividad:</label>
                 <input type="text" name="description" value={input.description} onChange={handleChange}/>
                 <label htmlFor="countries">Paises donde se puede realizar la actividad:</label>
-                <select name="countries" ref={countryIdSelect} onKeyPress={(e) => e.key === "Enter" ? addCountry(e) : null} onChange={validateForm}>
+                <select name="countries" ref={countryIdSelect} onKeyPress={(e) => e.key === "Enter" ? addCountry(e) : null}>
                     <option></option>
                     {countries.map(country => 
                         <option value={country.id}>{country.name}</option>
@@ -106,9 +117,11 @@ function ActivityForm({countries}) {
                         ))}
                     </ul>
                 </div>
-                {
-                    error.length !== 0 ? (<span>{error}</span>) : (<input type="submit" value="Enviar actividad"/>)
-                } 
+                <div>
+                    {
+                        error.length !== 0 ? (<span>{error}</span>) : (<input type="submit" value="Enviar actividad"/>)
+                    } 
+                </div>
             </form>
         </div>
     )
@@ -118,4 +131,10 @@ const mapStateToProps = (state) => ({
     countries: state.countries
 })
 
-export default connect(mapStateToProps)(ActivityForm)
+function mapDispatchToProps(dispatch) {
+    return {
+      addActivity: activity => dispatch(addActivity(activity))
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActivityForm)

@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 
 module.exports = async function (req,res,next) {
     var {name, difficult, duration, season, description, countriesIds} = req.body
+    console.log(req.body)
     if(!season) season = null
     if(!description) description = null
     if(!duration) duration = null

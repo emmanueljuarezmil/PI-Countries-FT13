@@ -7,7 +7,7 @@ module.exports = async function() {
                 Country.create({id: country.alpha3Code,
                     name: country.translations.es ? country.translations.es : country.name,
                     flag: country.flag,
-                    continent: country.region,
+                    continent: country.region !== '' ? country.region : 'Otros',
                     capital: country.capital,
                     subregion: country.subregion,
                     area: country.area !== null ? country.area : 0,
