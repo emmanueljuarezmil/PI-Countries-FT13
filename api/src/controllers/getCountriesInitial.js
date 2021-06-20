@@ -16,7 +16,7 @@ module.exports = async function() {
             )
         })
         .then(() =>{
-            console.log('Ciudades precargadas en la base de datos!')
+            console.log('Paises precargados en la base de datos!')
         })
         .catch(err => console.error(err))
 }
