@@ -15,7 +15,7 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <>
           <Route path='/' component={Nav}/>
-          <Route exact path="/home" component={Home} />
+          <Route path="/home" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/activity" component={ActivityForm} />
           <Route path='/' component={Footer}/>

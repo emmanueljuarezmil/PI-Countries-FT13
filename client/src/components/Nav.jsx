@@ -7,7 +7,7 @@ export default function Nav() {
         <div>
             <img src={logoHenry} alt="" />
             <div>
-                <NavLink to="/home" activeClassName="active" >Home</NavLink>
+                <NavLink to="/home/!#" activeClassName="active" >Home</NavLink>
                 <NavLink to="/activity" activeClassName="active" >Activity</NavLink>
                 <NavLink to="/about" activeClassName="active" >About</NavLink>
             </div>

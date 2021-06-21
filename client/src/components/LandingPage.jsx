@@ -5,7 +5,7 @@ function LandingPage({getCountries}) {
     return (
         <div>
             <h1>Bienvenido</h1>
-            <Link to='/home'>Ingresar</Link>
+            <Link to='/home/!#'>Ingresar</Link>
         </div>
     )
 }

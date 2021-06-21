@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux'
 import Paginater from './Paginater'
 import CountryCardsContainer from './CountryCardsContainer';
-import FilterBar from './FilterBar';
+// import FilterBar from './FilterBar';
 import axios from 'axios';
 
 function Home({countriesInitial, activities}) {
@@ -11,15 +11,23 @@ function Home({countriesInitial, activities}) {
     const [countriesToShow, setCountriesToShow] = useState(countries)
     const [orderAndName, setOrderAndName] = useState({name: '', orderBy: 'name', orderType: 'ASC'})
     const [filter, setFilter] = useState({activityIdFilter: '', continentFilter: ''})
+    const [loading, setLoading] = useState(false)
 
     const continentsRepeated = countriesInitial.map(el => el.continent)
     const continents = continentsRepeated.filter(function(item, pos) {
         return continentsRepeated.indexOf(item) === pos;
     })
+    
+    const countriesPerPage = 10
+    const indexOfLastCountry = currentPage * countriesPerPage
+    const indexOfFirstCountry = indexOfLastCountry - countriesPerPage
+    const countriesOfPage = countriesToShow.slice(indexOfFirstCountry, indexOfLastCountry)
+    
 
     // ordenamientos
     useEffect(() => {
         (async () => {
+            setLoading(true)
             try {
                 const {data} = await axios.get('http://localhost:3001/countries',{
                     params: {
@@ -30,8 +38,10 @@ function Home({countriesInitial, activities}) {
                 })
                 setCountries(data)
             } catch(err) {
+                setCountries([])
                 console.error(err)
             }
+            setLoading(false)
         })()
     }, [orderAndName])
 
@@ -63,6 +73,12 @@ function Home({countriesInitial, activities}) {
             ...filter,
             [name]: value
         })     
+    }
+
+    function clearFiltersAndOrders(e){
+        e.preventDefault()
+        setFilter({activityIdFilter: '', continentFilter: ''})
+        setOrderAndName({name: '', orderBy: 'name', orderType: 'ASC'})
     }
 
     return (
@@ -111,8 +127,11 @@ function Home({countriesInitial, activities}) {
                     </div>
                 </div>
             </div>
-            <CountryCardsContainer/>
-            <Paginater/>
+            <div>
+                <button onClick={clearFiltersAndOrders}>Eliminar filtros y ordenamientos</button>
+            </div>
+            <CountryCardsContainer loading={loading} countries={countriesOfPage}/>
+            <Paginater countriesPerPage={countriesPerPage} totalCountries={countriesToShow.length} setCurrentPage={setCurrentPage}/>
         </div>
     )
 }

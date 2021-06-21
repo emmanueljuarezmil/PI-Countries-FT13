@@ -1,14 +1,30 @@
 import React from 'react'
 
-function Paginater() {
+function Paginater({countriesPerPage, totalCountries, setCurrentPage}) {
+    const pageNumbers = []
+
+    for(let i = 1; i <= Math.ceil(totalCountries/countriesPerPage); i++) {
+        pageNumbers.push(i)
+    }
     return (
-        <div>
-            <span>Ir a la primera</span>
-            <span>1-</span>
-            <span>pag actual</span>
-            <span>1+</span>
-            <span>Ir al ultimo</span>            
-        </div>
+        <nav>
+            <ul className="pagination">
+                {
+                    pageNumbers.map(number => (
+                        <li key={number} className="page-item">
+                            <a href="/home/!#" className="page-link" onClick={(e) => {
+                                e.preventDefault()
+                                setCurrentPage(number)
+                            }
+                            }>
+                                {number}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+
     )
 }
 
