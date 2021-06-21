@@ -14,6 +14,8 @@ module.exports = async function (req,res,next) {
         const countries = await Country.findAll({
             include: {
                 model: Activity,
+                raw: true,
+                nest: true,
                 attributes: ['id'],
                 through: {
                     attributes: []
@@ -28,7 +30,14 @@ module.exports = async function (req,res,next) {
 
 
         if(countries.length) {
-            return res.json(countries)
+            const countriestosend = JSON.parse(JSON.stringify(countries)).map((el) => {
+                if(el.activities.length) {
+                    el.activities = el.activities.map(activity => activity.id)
+                    return el
+                }
+                else return el
+            })
+            return res.json(countriestosend)
         }
         else {
             next({status: 404, message: 'No se encontró ningún pais con el nombre indicado'})

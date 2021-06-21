@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {connect} from 'react-redux'
 import axios from 'axios'
-import { addActivity } from '../actions';
+import { addActivity, getCountries } from '../actions';
 
 function ActivityForm({countries, addActivity}) {
     const [input, setInput] = useState({
@@ -67,8 +67,8 @@ function ActivityForm({countries, addActivity}) {
         })
         var activity = response.data
         activity.countries = activity.countries.map(el => el.id)
-        console.log(activity)
         addActivity(activity)
+        getCountries()
         setInput({name: '', difficult: '', season: '', description: '', duration: ''})  
         setCountriesIds([])
     }

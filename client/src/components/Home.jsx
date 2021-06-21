@@ -8,14 +8,16 @@ import axios from 'axios';
 function Home({countriesInitial, activities}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [countries, setCountries] = useState(countriesInitial)
+    const [countriesToShow, setCountriesToShow] = useState(countries)
     const [orderAndName, setOrderAndName] = useState({name: '', orderBy: 'name', orderType: 'ASC'})
-    const [filter, setFilter] = useState({activity: '', continent: ''})
+    const [filter, setFilter] = useState({activityIdFilter: '', continentFilter: ''})
 
     const continentsRepeated = countriesInitial.map(el => el.continent)
     const continents = continentsRepeated.filter(function(item, pos) {
         return continentsRepeated.indexOf(item) === pos;
     })
 
+    // ordenamientos
     useEffect(() => {
         (async () => {
             try {
@@ -33,7 +35,19 @@ function Home({countriesInitial, activities}) {
         })()
     }, [orderAndName])
 
+    useEffect(() => {
+        setCountriesToShow(
+            filter.activityIdFilter && filter.continentFilter ?
+            countries.filter(el => el.continent === filter.continentFilter).filter(el => el.activities.includes(parseInt(filter.activityIdFilter))) :
+            filter.activityIdFilter && !filter.continentFilter ?
+            countries.filter(el => el.activities.includes(parseInt(filter.activityIdFilter))) :
+            !filter.activityIdFilter && filter.continentFilter ?
+            countries.filter(el => el.continent === filter.continentFilter) :
+            countries
+        )
+    },[filter, countries])
 
+    // seteo de ordenamientos
     function handleOrderChange(e) {
         const { value, name } = e.target;
         setOrderAndName({
@@ -42,6 +56,7 @@ function Home({countriesInitial, activities}) {
         })
     }
 
+    // seteo de filtros
     function handleFilterChange(e){
         const {value, name} = e.target
         setFilter({
@@ -74,7 +89,7 @@ function Home({countriesInitial, activities}) {
                     <p>filterbar</p>
                     <div>
                         <label htmlFor="Filtrar por actividades">Filtrar por actividades:</label>
-                        <select name="activity" value={filter.activity} onChange={handleFilterChange}>
+                        <select name="activityIdFilter" value={filter.activityIdFilter} onChange={handleFilterChange}>
                             <option value=""></option>
                             {
                                 activities.map(activity => 
@@ -85,7 +100,7 @@ function Home({countriesInitial, activities}) {
                     </div>
                     <div>
                         <label htmlFor="Filtrar por continente">Filtrar por continente:</label>
-                        <select name="continent" value={filter.continent} onChange={handleFilterChange}>
+                        <select name="continentFilter" value={filter.continentFilter} onChange={handleFilterChange}>
                             <option value=""></option>
                             {
                                 continents.map(el => 
