@@ -11,15 +11,15 @@ function Paginater({countriesPerPage, totalCountries, setCurrentPage}) {
             <ul className="pagination">
                 {
                     pageNumbers.map(number => (
-                        <li key={number} className="page-item">
+                        <span key={number} className="page-item">
                             <a href="/home/!#" className="page-link" onClick={(e) => {
                                 e.preventDefault()
                                 setCurrentPage(number)
                             }
                             }>
                                 {number}
-                            </a>
-                        </li>
+                            </a>-
+                        </span>
                     ))
                 }
             </ul>

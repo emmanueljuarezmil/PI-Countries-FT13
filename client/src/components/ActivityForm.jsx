@@ -99,7 +99,7 @@ function ActivityForm({countries, addActivity}) {
                 </select>
                 <label htmlFor="description">Descripción de la actividad:</label>
                 <input type="text" name="description" value={input.description} onChange={handleChange}/>
-                <label htmlFor="countries">Paises donde se puede realizar la actividad:</label>
+                <label htmlFor="countries">Paises donde se puede realizar la actividad (ingresar cada pais con enter):</label>
                 <select name="countries" ref={countryIdSelect} onKeyPress={(e) => e.key === "Enter" ? addCountry(e) : null}>
                     <option></option>
                     {countries.map(country => 

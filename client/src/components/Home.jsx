@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {connect} from 'react-redux'
 import Paginater from './Paginater'
 import CountryCardsContainer from './CountryCardsContainer';
-// import FilterBar from './FilterBar';
 import axios from 'axios';
 
 function Home({countriesInitial, activities}) {
@@ -55,6 +54,7 @@ function Home({countriesInitial, activities}) {
             countries.filter(el => el.continent === filter.continentFilter) :
             countries
         )
+        setCurrentPage(1)
     },[filter, countries])
 
     // seteo de ordenamientos

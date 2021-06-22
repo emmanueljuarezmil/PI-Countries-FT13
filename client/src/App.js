@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import About from './components/About';
 import ActivityForm from './components/ActivityForm';
+import CountryFull from './components/CountryFull';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <>
           <Route path='/' component={Nav}/>
           <Route path="/home" component={Home} />
+          <Route path="/country" component={CountryFull} />
           <Route exact path="/about" component={About} />
           <Route exact path="/activity" component={ActivityForm} />
           <Route path='/' component={Footer}/>
