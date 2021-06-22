@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
+import { addFullCountry } from '../actions';
 
 // agregar link para ir al detalle del pais
 
-function CountryCard({name, flag, continent, id}) {
+function CountryCard({name, flag, continent, id, addFullCountry}) {
     return (
         <div>
             <div>
@@ -15,9 +18,18 @@ function CountryCard({name, flag, continent, id}) {
             </div>
             <div>
                 <img src={flag} alt="No se encontro la imagen" />                
-            </div>          
+            </div>    
+            <div>
+                <Link to='/country' onClick={() => addFullCountry(id)}>Detalle del país</Link>
+            </div>      
         </div>
     )
 }
 
-export default CountryCard
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFullCountry: id => dispatch(addFullCountry(id))
+    }
+  }
+
+  export default connect(null, mapDispatchToProps)(CountryCard)

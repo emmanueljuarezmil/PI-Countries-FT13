@@ -1,29 +1,27 @@
 import React from 'react'
 
-function Paginater({countriesPerPage, totalCountries, setCurrentPage}) {
+function Paginater({countriesPerPage, totalCountries, setCurrentPage, currentPage}) {
     const pageNumbers = []
 
     for(let i = 1; i <= Math.ceil(totalCountries/countriesPerPage); i++) {
         pageNumbers.push(i)
     }
     return (
-        <nav>
-            <ul className="pagination">
+        <div>
                 {
-                    pageNumbers.map(number => (
-                        <span key={number} className="page-item">
-                            <a href="/home/!#" className="page-link" onClick={(e) => {
-                                e.preventDefault()
-                                setCurrentPage(number)
-                            }
-                            }>
-                                {number}
-                            </a>-
-                        </span>
+                    pageNumbers.map((number) => (
+                            <span key={number} >
+                                <button onClick={(e) => {
+                                    e.preventDefault()
+                                    setCurrentPage(number)
+                                }
+                                }>
+                                    {number}
+                                </button>
+                            </span>                 
                     ))
                 }
-            </ul>
-        </nav>
+        </div>
 
     )
 }

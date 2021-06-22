@@ -52,25 +52,31 @@ function ActivityForm({countries, addActivity}) {
 
     async function submitForm(e) {
         e.preventDefault()
-        const data = {
-            name: input.name,
-            difficult: parseInt(input.difficult),
-            season: input.season,
-            duration: parseInt(input.duration),
-            description: input.description,
-            countriesIds: countriesIds.map(el => el[0])
+        try {
+            const data = {
+                name: input.name,
+                difficult: parseInt(input.difficult),
+                season: input.season,
+                duration: parseInt(input.duration),
+                description: input.description,
+                countriesIds: countriesIds.map(el => el[0])
+            }
+            const response = await axios({
+                method: 'POST',
+                url: 'http://localhost:3001/activity',
+                data
+            })
+            var activity = response.data
+            activity.countries = activity.countries.map(el => el.id)
+            addActivity(activity)
+            getCountries()
+            setInput({name: '', difficult: '', season: '', description: '', duration: ''})  
+            setCountriesIds([])
+            window.alert('Actividad añadida con éxito')
         }
-        const response = await axios({
-            method: 'POST',
-            url: 'http://localhost:3001/activity',
-            data
-        })
-        var activity = response.data
-        activity.countries = activity.countries.map(el => el.id)
-        addActivity(activity)
-        getCountries()
-        setInput({name: '', difficult: '', season: '', description: '', duration: ''})  
-        setCountriesIds([])
+        catch(err) {
+            console.error(err)
+        }
     }
 
     return (
@@ -112,7 +118,7 @@ function ActivityForm({countries, addActivity}) {
                             <li>
                                 <span>{countryId[1]}</span>
                                 <button onClick={(e) => {e.preventDefault()
-                                    removeCountryId(countryId[0])}}>X</button>
+                                    removeCountryId(countryId[0])}}>Eliminar pais</button>
                             </li>
                         ))}
                     </ul>
@@ -131,7 +137,7 @@ const mapStateToProps = (state) => ({
     countries: state.countries
 })
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
       addActivity: activity => dispatch(addActivity(activity))
     }

@@ -131,7 +131,7 @@ function Home({countriesInitial, activities}) {
                 <button onClick={clearFiltersAndOrders}>Eliminar filtros y ordenamientos</button>
             </div>
             <CountryCardsContainer loading={loading} countries={countriesOfPage}/>
-            <Paginater countriesPerPage={countriesPerPage} totalCountries={countriesToShow.length} setCurrentPage={setCurrentPage}/>
+            <Paginater countriesPerPage={countriesPerPage} totalCountries={countriesToShow.length} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
         </div>
     )
 }

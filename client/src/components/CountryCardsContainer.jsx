@@ -1,4 +1,5 @@
 import React from 'react'
+import CountryCard from './CountryCard'
 
 function CountryCardsContainer({loading, countries}) {
     if(loading) {
@@ -14,9 +15,7 @@ function CountryCardsContainer({loading, countries}) {
                 {
                     countries.length ?
                     countries.map(country => 
-                        <p>
-                            {country.name}
-                        </p>
+                        <CountryCard name={country.name} flag={country.flag} continent={country.continent} id={country.id}/>
                     ) :
                     <h2>No hay paises para mostrar</h2>
                 }
