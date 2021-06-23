@@ -6,7 +6,6 @@ module.exports = async function (req,res,next) {
     console.log(req.query)
     if(name) name = decodeURI(name)
     if((orderBy !== 'name' && orderBy !== 'poblation') || (orderType !== 'ASC' && orderType !== 'DESC')) {
-        // return res.status(400).send('Los parametros enviados son incorrectos, no te hagas el piola')
         next({status: 400, message: 'Los parametros enviados son incorrectos'})
     }
 

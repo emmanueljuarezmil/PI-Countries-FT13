@@ -10,15 +10,19 @@ function Paginater({countriesPerPage, totalCountries, setCurrentPage, currentPag
     return (
         <div className='paginater-container'>
                 {
-                    pageNumbers.map((number) => (
-                        <button className={number === currentPage ? 'paginater-button paginater-button-active' : 'paginater-button'} onClick={(e) => {
-                            e.preventDefault()
-                            setCurrentPage(number)
-                        }
-                        }>
-                            {number}
-                        </button>                
-                    ))
+                    totalCountries >= 12 ?
+                        pageNumbers.map((number) => (
+                            <button className={number === currentPage ? 'paginater-button paginater-button-active' : 'paginater-button'} onClick={(e) => {
+                                e.preventDefault()
+                                setCurrentPage(number)
+                            }
+                            }>
+                                {number}
+                            </button>                
+                        )) :
+                    
+                    null
+
                 }
         </div>
 

@@ -34,7 +34,7 @@ function CountryCardFull({country}) {
                         }
                     </h3>
                     {
-                        country.activities.length ?
+                        country.activities ?
                         (
 
                             <div className='countryfull-container-card-data-activities'>
