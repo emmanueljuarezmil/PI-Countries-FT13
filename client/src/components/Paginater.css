@@ -1,0 +1,23 @@
+.paginater-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginater-button {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    margin: 0 5px;
+    background-color: #c9c9c9;
+}
+
+.paginater-button-active {
+    background-color: #fff;
+}
+
+.paginater-button:hover {
+    cursor: pointer;
+    background-color: #ddd;
+}

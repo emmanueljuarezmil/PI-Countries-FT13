@@ -4,9 +4,11 @@ import './LandingPage.css'
 
 function LandingPage() {
     return (
-        <div className='container'>
-            <h1>Bienvenido</h1>
-            <Link to='/home'>Ingresar</Link>
+        <div className='landing'>
+            <div className='landing-container'>
+                <h2>Bienvenido</h2>
+                <Link to='/home' className='landing-link'>INGRESAR</Link>
+            </div>
         </div>
     )
 }

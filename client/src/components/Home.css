@@ -1,0 +1,28 @@
+.home {
+    background: var(--background);
+    height: 87vh;
+}
+
+.home-filtersearchbar {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    padding: 5px 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-filtersearchbar-element {
+    width: 15vw;
+}
+
+.home-filtersearchbar-element select {
+    width: 10vw;
+    border: none;
+}
+
+.home-filtersearchbar-element select:focus {
+    outline: none;
+}
+
+

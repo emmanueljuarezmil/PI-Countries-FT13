@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Paginater from './Paginater'
 import CountryCardsContainer from './CountryCardsContainer';
 import axios from 'axios';
+import './Home.css'
 
 function Home({countriesInitial, activities}) {
     const [currentPage, setCurrentPage] = useState(1)
@@ -17,7 +18,7 @@ function Home({countriesInitial, activities}) {
         return continentsRepeated.indexOf(item) === pos;
     })
     
-    const countriesPerPage = 10
+    const countriesPerPage = 12
     const indexOfLastCountry = currentPage * countriesPerPage
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage
     const countriesOfPage = countriesToShow.slice(indexOfFirstCountry, indexOfLastCountry)
@@ -82,31 +83,37 @@ function Home({countriesInitial, activities}) {
     }
 
     return (
-        <div>
-            <div>
-                <p>SearchBar</p>
-                <input type="text" name="name" value={orderAndName.name} placeholder="Ingresa el nombre de algun pais" onChange={handleOrderChange}/>
-            </div>
-            <div>
-                <p>OrderBar</p>
-                <div>
-                    <label htmlFor="Ordenar por">Ordenar por:</label>
-                    <select name="orderBy" value={orderAndName.orderBy} onChange={handleOrderChange}>
-                        <option value="name">Nombres</option>
-                        <option value="poblation">Población</option>
-                    </select>
-                    <label htmlFor="Tipo de orden">Tipo de orden:</label>
-                    <select name="orderType" value={orderAndName.orderType} onChange={handleOrderChange}>
-                        <option value="ASC">Ascendente</option>
-                        <option value="DESC">Descendente</option>
-                    </select>
+        <div className='home'>
+            <div className='home-filtersearchbar'>
+                <div className='home-filtersearchbar-element'>
+                    <div>
+                        <label htmlFor="Ordenar por">Ordenar por:</label>
+                    </div>
+                    <div>
+                        <select name="orderBy" value={orderAndName.orderBy} onChange={handleOrderChange}>
+                            <option value="name">Nombres</option>
+                            <option value="poblation">Población</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <p>filterbar</p>
+                <div className='home-filtersearchbar-element'>
+                    <div>
+                        <label htmlFor="Tipo de orden">Tipo de orden:</label>
+                    </div>
+                    <div>
+                        <select name="orderType" value={orderAndName.orderType} onChange={handleOrderChange}>
+                            <option value="ASC">Ascendente</option>
+                            <option value="DESC">Descendente</option>
+                        </select>
+                    </div>
+                </div>
+                <div className='home-filtersearchbar-element'>
                     <div>
                         <label htmlFor="Filtrar por actividades">Filtrar por actividades:</label>
+                    </div>
+                    <div>
                         <select name="activityIdFilter" value={filter.activityIdFilter} onChange={handleFilterChange}>
-                            <option value=""></option>
+                            <option value="">Actividad</option>
                             {
                                 activities.map(activity => 
                                     <option value={activity.id}>{activity.name}</option>
@@ -114,21 +121,24 @@ function Home({countriesInitial, activities}) {
                             }
                         </select>
                     </div>
-                    <div>
-                        <label htmlFor="Filtrar por continente">Filtrar por continente:</label>
-                        <select name="continentFilter" value={filter.continentFilter} onChange={handleFilterChange}>
-                            <option value=""></option>
-                            {
-                                continents.map(el => 
-                                    <option value={el}>{el}</option>
-                                )
-                            }
-                        </select>
-                    </div>
                 </div>
-            </div>
-            <div>
-                <button onClick={clearFiltersAndOrders}>Eliminar filtros y ordenamientos</button>
+                <div className='home-filtersearchbar-element'>
+                    <label htmlFor="Filtrar por continente">Filtrar por continente:</label>
+                    <select name="continentFilter" value={filter.continentFilter} onChange={handleFilterChange}>
+                        <option value="">Continente</option>
+                        {
+                            continents.map(el => 
+                                <option value={el}>{el}</option>
+                            )
+                        }
+                    </select>
+                </div>
+                <div className='home-filtersearchbar-element'>
+                    <input type="text" name="name" value={orderAndName.name} placeholder="Buscar un pais" onChange={handleOrderChange}/>
+                </div>
+                <div className='home-filtersearchbar-element'>
+                    <button onClick={clearFiltersAndOrders}>Eliminar filtros y búsqueda</button>
+                </div>
             </div>
             <CountryCardsContainer loading={loading} countries={countriesOfPage}/>
             <Paginater countriesPerPage={countriesPerPage} totalCountries={countriesToShow.length} setCurrentPage={setCurrentPage} currentPage={currentPage}/>

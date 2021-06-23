@@ -1,0 +1,28 @@
+.countrycard-container {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    width: 23vw;
+    height: 23vh;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+    border: 1px solid black;
+}
+
+.country-card-link {
+    color: #000;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: .95rem;
+    padding: 2px;
+    background-color: rgba(200, 200, 200, .7);
+    transition: .2s ;
+}
+
+.country-card-link:hover {
+    font-size: 1rem;
+    background-color: #fff;
+    opacity: .95;
+}

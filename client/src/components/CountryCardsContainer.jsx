@@ -1,5 +1,6 @@
 import React from 'react'
 import CountryCard from './CountryCard'
+import './CountryCardsContainer.css'
 
 function CountryCardsContainer({loading, countries}) {
     if(loading) {
@@ -11,7 +12,7 @@ function CountryCardsContainer({loading, countries}) {
     }
     else {
         return (
-            <div>
+            <div className='country-cards-container'>
                 {
                     countries.length ?
                     countries.map(country => 

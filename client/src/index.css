@@ -1,6 +1,9 @@
 :root {
-  --titles: helvetica;
-  --links: arial;
+  --titlesfont: helvetica;
+  --linksfont: arial;
+  --linksweight: 700;
+  --navfooterback: #f9ff00;
+  --background: linear-gradient(90deg, rgba(227,255,50,1) 0%, rgba(69,245,255,1) 35%, rgba(153,216,255,1) 100%);
   font-family: verdana;
 }
 

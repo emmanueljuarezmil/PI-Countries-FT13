@@ -1,4 +1,5 @@
 import React from 'react'
+import './Paginater.css'
 
 function Paginater({countriesPerPage, totalCountries, setCurrentPage, currentPage}) {
     const pageNumbers = []
@@ -7,18 +8,16 @@ function Paginater({countriesPerPage, totalCountries, setCurrentPage, currentPag
         pageNumbers.push(i)
     }
     return (
-        <div>
+        <div className='paginater-container'>
                 {
                     pageNumbers.map((number) => (
-                            <span key={number} >
-                                <button onClick={(e) => {
-                                    e.preventDefault()
-                                    setCurrentPage(number)
-                                }
-                                }>
-                                    {number}
-                                </button>
-                            </span>                 
+                        <button className={number === currentPage ? 'paginater-button paginater-button-active' : 'paginater-button'} onClick={(e) => {
+                            e.preventDefault()
+                            setCurrentPage(number)
+                        }
+                        }>
+                            {number}
+                        </button>                
                     ))
                 }
         </div>
