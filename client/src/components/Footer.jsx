@@ -16,11 +16,11 @@ export default function Footer() {
                 <span>
                     POWERED BY:
                 </span>
-                <img src={express} className='footer-icon'/>
-                <img src={postgres} className='footer-icon'/>
-                <img src={react} className='footer-icon'/>
-                <img src={redux} className='footer-icon' />
-                <img src={sequelize} className='footer-icon'/>
+                <img src={express} className='footer-icon' alt="Imagen no encontrada"/>
+                <img src={postgres} className='footer-icon' alt="Imagen no encontrada"/>
+                <img src={react} className='footer-icon' alt="Imagen no encontrada"/>
+                <img src={redux} className='footer-icon' alt="Imagen no encontrada" />
+                <img src={sequelize} className='footer-icon' alt="Imagen no encontrada"/>
             </div>
         </div>
     )

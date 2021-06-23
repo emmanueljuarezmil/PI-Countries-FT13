@@ -1,19 +1,68 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from "react-router-dom";
+import './CountryFull.css'
 
 function CountryCardFull({country}) {
     
     return (
-        <div>
-            <h2>Tarjeta country con todos los detalles</h2>
+        <div className='countryfull-container'>
             {country ? 
-            <div>
-                <p>Nombre del pais: {country.name}</p>
+            <div className='countryfull-container-card'>
+                <div className='countryfull-container-card-flag'>
+                    <img src={country.flag} alt="Imagen no encontrada" />
+                </div>
+                <div className='countryfull-container-card-data'>
+                    <h2> {
+                            `${country.name} (${country.id})`
+                        } 
+                    </h2>
+                    <h3>Continente: {country.continent}</h3>
+                    <h3>Subregion: {country.subregion}</h3>
+                    <h3>Capital: {country.capital}</h3>
+                    <h3>{
+                            country.poblation >= 1000000 ?
+                            (country.poblation/1000000).toFixed(2) + " Millones de habitantes" :
+                            (country.poblation/1000).toFixed(2) + " Miles de habitantes"                            
+                        }
+                    </h3>
+                    <h3>
+                        {
+                            country.area >= 1000000 ?
+                            (country.area/1000000).toFixed(2) + " millones de km2" :
+                            (country.area/1000).toFixed(2) + " mil km2"
+                        }
+                    </h3>
+                    {
+                        country.activities.length ?
+                        (
+
+                            <div className='countryfull-container-card-data-activities'>
+                                <h3>Actividades que se pueden realizar en el pais:</h3>
+                                <ul>
+                                    {
+                                        country.activities ?
+                                        country.activities.map(activity => <li>
+                                            {
+                                                (`${activity.name}. `) +
+                                                (activity.duration ? ` Duración: ${activity.duration} minutos.` : ``) +
+                                                (activity.difficult ? ` Dificultad: ${activity.difficult}.` : ``) +
+                                                (activity.season ? ` Temporada: ${activity.season}.` : ``) +
+                                                (activity.description ? ` Descripción: ${activity.description}.` : ``)
+                                            }
+                                        </li>) :
+                                        null
+                                    }
+                                </ul>
+                            </div>
+                        ) :
+                        null
+                    }
+                </div>
             </div> :
             <h2>No existe el pais o algo paso :(</h2> 
             }
-            <Link to='/home'>Volver al home</Link>            
+            <Link to='/home' className='countryfull-linkhome'>Regresar al home</Link>            
         </div>
     )
 }

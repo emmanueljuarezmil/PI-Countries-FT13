@@ -1,0 +1,84 @@
+.countryfull-container {
+    background: var(--background);
+    height: 87vh;
+    min-height: 87vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.countryfull-container-card {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.countryfull-container-card-flag {
+    padding: 15px;
+    display: flex;
+    max-height: 75%;
+    margin: auto;
+}
+
+.countryfull-container-card-flag {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countryfull-container-card-flag img {
+    width: 90%;
+}
+
+.countryfull-container-card-data {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 15px auto;
+}
+
+.countryfull-container h2 {
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 2rem;
+    font-family: var(--titlesfont);
+}
+
+.countryfull-container h3 {
+    font-size: 1.2rem;
+    padding: 8px;
+    margin: 0;
+    font-family: var(--titlesfont);
+}
+
+.countryfull-container-card-data-activities {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.countryfull-container-card-data-activities ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.countryfull-linkhome {
+    text-decoration: none;
+    border-radius: 10px;
+    color: #000;
+    background-color: #eee;
+    padding: 10px;
+    position: absolute;
+    bottom: 7vh;
+}
+
+.countryfull-linkhome:hover {
+    background-color: #fff;
+}
