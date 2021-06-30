@@ -30,7 +30,9 @@ function CountryCardFull({country}) {
                         {
                             country.area >= 1000000 ?
                             (country.area/1000000).toFixed(2) + " millones de km2" :
-                            (country.area/1000).toFixed(2) + " mil km2"
+                            country.area >= 1000 ?
+                            (country.area/1000).toFixed(2) + " mil km2" :
+                            country.area + " km2"
                         }
                     </h3>
                     {
@@ -39,10 +41,10 @@ function CountryCardFull({country}) {
 
                             <div className='countryfull-container-card-data-activities'>
                                 <h3>Actividades que se pueden realizar en el pais:</h3>
-                                <ul>
+                                <div>
                                     {
                                         country.activities ?
-                                        country.activities.map(activity => <li>
+                                        country.activities.map(activity => <span className='countryfull-container-card-data-activities-item'>
                                             {
                                                 (`${activity.name}. `) +
                                                 (activity.duration ? ` Duración: ${activity.duration} minutos.` : ``) +
@@ -50,10 +52,10 @@ function CountryCardFull({country}) {
                                                 (activity.season ? ` Temporada: ${activity.season}.` : ``) +
                                                 (activity.description ? ` Descripción: ${activity.description}.` : ``)
                                             }
-                                        </li>) :
+                                        </span>) :
                                         null
                                     }
-                                </ul>
+                                </div>
                             </div>
                         ) :
                         null

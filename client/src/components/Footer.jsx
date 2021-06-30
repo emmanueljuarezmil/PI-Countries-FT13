@@ -9,9 +9,6 @@ import sequelize from '../img/sequelize.png'
 export default function Footer() {
     return (
         <div className='footer'>
-            <div className='footer-element footer-madeby'>
-                <span>MADE BY: Emmanuel Juarez</span>
-            </div>
             <div className='footer-element footer-poweredby'>
                 <span>
                     POWERED BY:

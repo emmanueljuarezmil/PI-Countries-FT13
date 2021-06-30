@@ -21,6 +21,12 @@
 
 .activityform-form label {
     font-size: 1.1rem;
+    width: 50%;
+    background-color: #fff;
+    line-height: 200%;
+    text-align: left;
+    border-radius: 7px;
+    padding: 0 15px;
 }
 
 .activityform-form-item {
@@ -41,11 +47,14 @@
 }
 
 .activityform-countries {
-    height: 20vh;
+    height: 15vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: left;
+    padding: 10px;
 }
+
+
 
 .activityform-countries-item {
     min-width: 8vw;
@@ -63,10 +72,24 @@
     border-radius: 10px;
     font-family: var(--linksfont);
     font-weight: var(--linksweight);
-    margin-top: -2vh;
+    margin-top: -5vh;
+    background-color: #fff;
 }
 
 .activityform-submit-button:hover {
-    background-color: #fff;
+    background-color: #f2f2f2;
     cursor: pointer;
+}
+
+.activityform-countries-item-delete {
+    background-color: #fff;
+    border: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 5px;
+}
+
+.activityform-countries-item-delete:hover {
+    cursor: pointer;
+    background-color: #ccc;
 }

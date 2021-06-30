@@ -13,7 +13,7 @@ export default function Nav() {
                 <NavLink to="/home" activeClassName="nav-link-active" className='nav-link'>HOME</NavLink>
                 <NavLink to="/activity" activeClassName="nav-link-active" className='nav-link'>ACTIVIDAD</NavLink>
             </div>
-            <span className='nav-text'>PI Countries - FT13</span>
+            <span className='nav-text'>Proyecto Individual FT13</span>
         </div>
     )
 }

@@ -83,7 +83,7 @@ function ActivityForm({countries, addActivity}) {
     return (
         <div className='activityform-container'>
             <div>
-                <h2>Generador de actividades</h2>
+                <h2>Ingresa tu actividad</h2>
             </div>
             <div className='activityform-form'>
                 <form onSubmit={(e) => {submitForm(e)}}>
@@ -132,8 +132,8 @@ function ActivityForm({countries, addActivity}) {
                     <div className='activityform-countries'>
                             {countriesIds.map((countryId) => (
                                 <span className='activityform-countries-item'>
-                                    {countryId[1]}
-                                    <button onClick={(e) => {e.preventDefault()
+                                    {`${countryId[1]} `}
+                                    <button className='activityform-countries-item-delete' onClick={(e) => {e.preventDefault()
                                         removeCountryId(countryId[0])}}>X</button>
                                 </span>
                             ))}

@@ -10,28 +10,33 @@
 
 
 .countryfull-container-card {
-    width: 100%;
-    max-width: 100%;
+    width: 90vw;
+    height: 70vh;
+    margin: 1rem;
     display: flex;
     flex-direction: row;
+    background-color: #eee;
+    border: 2px solid #000;
+    border-radius: 35px;
+    box-shadow: 5px 4px 23px 2px rgba(0,0,0,0.39);
+    -webkit-box-shadow: 5px 4px 23px 2px rgba(0,0,0,0.39);
+    -moz-box-shadow: 5px 4px 23px 2px rgba(0,0,0,0.39);
 }
 
-.countryfull-container-card-flag {
-    padding: 15px;
-    display: flex;
-    max-height: 75%;
-    margin: auto;
-}
 
 .countryfull-container-card-flag {
     width: 50%;
+    padding: 15px;
     display: flex;
+    max-height: 75%;
     justify-content: center;
     align-items: center;
+    margin: auto;
 }
 
 .countryfull-container-card-flag img {
     width: 90%;
+    border: 2px solid #000;
 }
 
 .countryfull-container-card-data {
@@ -60,6 +65,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 0 8px;
 }
 
 .countryfull-container-card-data-activities ul {
@@ -81,4 +87,9 @@
 
 .countryfull-linkhome:hover {
     background-color: #fff;
+}
+
+.countryfull-container-card-data-activities-item {
+    display: block;
+    text-align: left;
 }
