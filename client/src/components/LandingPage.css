@@ -19,6 +19,8 @@
     font-size: 5rem;
     padding: 15px;
     opacity: 90%;
+    animation-name: bienvenido;
+    animation-duration: 1s;
 }
 
 .landing-link {
@@ -33,9 +35,35 @@
     background-color: #ccc;
     font-weight: var(--linksweight);
     opacity: 80%;
+    animation-name: ingresar;
+    animation-duration: 2s;
 }
 
 .landing-link:hover {
     opacity: 100%;
     background-color: #ddd;
+}
+
+@keyframes bienvenido {
+    0% {
+        transform:scale(0)
+    }
+    20% {
+        transform:scale(.1)
+    }
+    100% {
+        transform:scale(1)
+    }
+}
+
+@keyframes ingresar {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: .8;
+    }
 }
