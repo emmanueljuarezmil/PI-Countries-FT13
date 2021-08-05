@@ -1,5 +1,7 @@
 const {Country, Activity} = require('../db')
 
+const exclude = ['createdAt', 'updatedAt']
+
 module.exports = async function (req,res,next) {
     const {id} = req.params
     try {
@@ -8,14 +10,14 @@ module.exports = async function (req,res,next) {
             include: {
                 model: Activity,
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude
                 },
                 through: {
                   attributes: []
                 }
             },
             attributes: {
-                exclude: ['createdAt', 'updatedAt']
+                exclude
             }
         })
         if(country.length){

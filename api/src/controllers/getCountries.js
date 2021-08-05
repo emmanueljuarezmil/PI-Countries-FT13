@@ -1,9 +1,10 @@
 const {Country, Activity} = require('../db')
 const { Op } = require('sequelize')
 
+const exclude = ['createdAt', 'updatedAt']
+
 module.exports = async function (req,res,next) {
-    var {name, orderBy = 'name', orderType = 'ASC'} = req.query
-    console.log(req.query)
+    let {name, orderBy = 'name', orderType = 'ASC'} = req.query
     if(name) name = decodeURI(name)
     if((orderBy !== 'name' && orderBy !== 'poblation') || (orderType !== 'ASC' && orderType !== 'DESC')) {
         next({status: 400, message: 'Los parametros enviados son incorrectos'})
@@ -21,7 +22,7 @@ module.exports = async function (req,res,next) {
                 }
             },
             attributes: {
-                exclude: ['createdAt', 'updatedAt', 'capital', 'subregion', 'area']
+                exclude: [...exclude, 'capital', 'subregion', 'area']
             },
             order: [[orderBy, orderType]],
             where: name ? {name: {[Op.iLike]: `%${name}%`}} : null
