@@ -1,12 +1,13 @@
-:root {
-  --titlesfont: helvetica;
-  --linksfont: arial;
-  --linksweight: 700;
-  --navfooterback: #f9ff00;
-  --background: linear-gradient(90deg, rgba(240,240,240,1) 0%, rgba(231,231,231,1) 35%, rgba(212,212,212,1) 100%);
-  font-family: verdana;
-}
-
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

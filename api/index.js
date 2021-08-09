@@ -19,14 +19,10 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const { getCountriesInitial } = require('./src/controllers')
-const {FORCE, PORT} = process.env
-const force = JSON.parse(FORCE)
 
 // Syncing all the models at once.
-conn.sync({ force })
-.then(() => console.log('Base de datos conectada'))
-.then(() => force ? getCountriesInitial() : null)
-.then(() => server.listen(PORT, () => console.log(`Server listening at port ${PORT}`))
-)
-.catch((err) => console.error(err))
+conn.sync({ force: true }).then(() => {
+  server.listen(3001, () => {
+    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  });
+});
