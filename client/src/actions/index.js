@@ -9,7 +9,8 @@ import {
     GET_ACTIVITIES,
     SET_ACTIVITY_FILTER,
     GET_COUNTRY_DETAIL,
-    SET_CONTINENT_FILTER
+    SET_CONTINENT_FILTER,
+    GET_COUNTRIES_FOR_ACTIVITIES
 } from '../constants'
 
 export const getCountries = ( name, orderBy, orderType, page, itemsPerPage, activityFilter, continentFilter ) => {
@@ -18,6 +19,20 @@ export const getCountries = ( name, orderBy, orderType, page, itemsPerPage, acti
         const { data } = await axios.get(`${BACKENDURL}/countries?name=${name}&orderBy=${orderBy}&orderType=${orderType}&page=${page}&itemsPerPage=${itemsPerPage}&activityFilter=${activityFilter}&continentFilter=${continentFilter}`)
         dispatch({
           type: GET_COUNTRIES,
+          payload: data
+        })
+    } catch (err) {
+        console.error(err)
+    }
+  }
+}
+
+export const getCountriesForActivities = () => {
+  return async (dispatch) => {
+    try {
+        const { data } = await axios.get(`${BACKENDURL}/countriesForActivities`)
+        dispatch({
+          type: GET_COUNTRIES_FOR_ACTIVITIES,
           payload: data
         })
     } catch (err) {

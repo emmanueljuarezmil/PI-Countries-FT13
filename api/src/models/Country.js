@@ -31,6 +31,12 @@ module.exports = (sequelize) => {
     },
     poblation: {
       type: DataTypes.INTEGER,
+    },
+    lat: {
+      type: DataTypes.DECIMAL
+    },
+    lng: {
+      type: DataTypes.DECIMAL
     }
   });
 };

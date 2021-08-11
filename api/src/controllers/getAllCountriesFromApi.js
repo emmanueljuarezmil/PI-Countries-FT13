@@ -13,7 +13,9 @@ const getAllCountriesFromApi = async () => {
                 capital: country.capital,
                 subregion: country.subregion,
                 area: country.area ? country.area : 0,
-                poblation: country.population
+                poblation: country.population,
+                lat: country.latlng[0],
+                lng: country.latlng[1]
             })
         }
         console.log('Paises precargados en la base de datos')

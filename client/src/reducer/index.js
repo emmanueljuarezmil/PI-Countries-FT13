@@ -7,7 +7,8 @@ import {
     GET_ACTIVITIES,
     SET_ACTIVITY_FILTER,
     GET_COUNTRY_DETAIL,
-    SET_CONTINENT_FILTER
+    SET_CONTINENT_FILTER,
+    GET_COUNTRIES_FOR_ACTIVITIES
 } from '../constants'
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
     orderType: 'ASC',
     activityFilter: '',
     continents: [],
-    continentFilter: ''
+    continentFilter: '',
+    countriesForActivities: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -72,6 +74,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 continentFilter: action.payload
+            }
+        case GET_COUNTRIES_FOR_ACTIVITIES:
+            return {
+                ...state,
+                countriesForActivities: action.payload
             }
         default:
             return state;

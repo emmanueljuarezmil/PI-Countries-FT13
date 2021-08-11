@@ -35,10 +35,6 @@ const getCountries = async (req,res,next) => {
 
     try {
         const queryConfig = {
-            // where: name ? {
-            //     name: {[Op.iLike]: `%${name}%`}
-            // } : 
-            // null,
             where,
             include: {
                 model: Activity,

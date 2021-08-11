@@ -5,6 +5,7 @@ import Landing from './components/Landing/Landing'
 import Footer from './components/Footer/Footer'
 import Home from './components/Home/Home'
 import CountryDetail from './components/CountryDetail/CountryDetail'
+import ActivityForm from './components/ActivityForm/ActivityForm';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route exact path="/" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/countryDetail" component={CountryDetail} />
+      <Route exact path="/activity" component={ActivityForm} />
       <Route path='/' component={Footer}/>
     </div>
   );
