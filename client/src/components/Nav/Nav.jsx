@@ -13,7 +13,7 @@ const Nav = () => {
             </div>
             <div className='nav-links'>
                 <NavLink to="/home" activeClassName="nav-link-active" className='nav-link'>HOME</NavLink>
-                <NavLink to="/activity" activeClassName="nav-link-active" className='nav-link'>INGRESAR ACTIVIDAD</NavLink>
+                <NavLink to="/activities" activeClassName="nav-link-active" className='nav-link'>ACTIVIDADES</NavLink>
                 <NavLink to="/about" activeClassName="nav-link-active" className='nav-link'>ABOUT</NavLink>
             </div>
             <span className='nav-text'>Proyecto Individual FT13</span>

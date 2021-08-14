@@ -8,12 +8,14 @@ import {
     SET_ACTIVITY_FILTER,
     GET_COUNTRY_DETAIL,
     SET_CONTINENT_FILTER,
-    GET_COUNTRIES_FOR_ACTIVITIES
+    GET_COUNTRIES_FOR_ACTIVITIES,
+    GET_ACTIVITIES_FOR_SEARCH_BAR
 } from '../constants'
 
 const initialState = {
     activities: [],
     countries: [],
+    activitiesForSearchBar: [],
     countryDetail: {},
     currentPage: 1,
     totalPages: 0,
@@ -55,10 +57,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 orderBy: action.payload
             }
-        case GET_ACTIVITIES:
+        case GET_ACTIVITIES_FOR_SEARCH_BAR:
             return {
                 ...state,
-                activities: action.payload
+                activitiesForSearchBar: action.payload
             }
         case SET_ACTIVITY_FILTER:
             return {
@@ -79,6 +81,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 countriesForActivities: action.payload
+            }
+        case GET_ACTIVITIES:
+            return {
+                ...state,
+                activities: action.payload
             }
         default:
             return state;

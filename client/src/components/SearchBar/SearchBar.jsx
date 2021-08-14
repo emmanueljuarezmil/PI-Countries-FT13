@@ -1,5 +1,5 @@
 import './SearchBar.css'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { 
     setSearch,
@@ -7,18 +7,24 @@ import {
     setOrderType,
     setCurrentPage,
     setActivityFilter,
-    setContinentFilter
+    setContinentFilter,
+    getActivitiesForSearchBar
 } from '../../actions'
 
 const SearchBar = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getActivitiesForSearchBar())
+    }, [dispatch])
+    
     const currentSearch = useSelector(state => state.searchedCountries)
     const orderBy = useSelector(state => state.orderBy)
     const orderType = useSelector(state => state.orderType)
-    const activities = useSelector(state => state.activities)
+    const activitiesForSearchBar = useSelector(state => state.activitiesForSearchBar)
     const activityFilter = useSelector(state => state.activityFilter)
     const continents = useSelector(state => state.continents)
     const continentFilter = useSelector(state => state.continentFilter)
-    const dispatch = useDispatch()
 
     const clearSearch = () => {
         dispatch(setSearch(''))
@@ -71,7 +77,7 @@ const SearchBar = () => {
             value={activityFilter}>
                 <option value="">Ninguna</option>
                 {
-                    activities && activities.map((activity, index) => <option key={index} value={activity.id}>{activity.name}</option>)
+                    activitiesForSearchBar && activitiesForSearchBar.map((activity, index) => <option key={index} value={activity.id}>{activity.name}</option>)
                 }
             </select>
             <button onClick={() => clearSearch()}>Eliminar filtros y búsqueda</button>

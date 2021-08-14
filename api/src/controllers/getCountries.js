@@ -9,7 +9,7 @@ const getCountries = async (req,res,next) => {
         orderBy = 'name',
         orderType = 'ASC',
         page = 1,
-        itemsPerPage = 10,
+        itemsPerPage = 9,
         activityFilter = '',
         continentFilter = ''
     } = req.query

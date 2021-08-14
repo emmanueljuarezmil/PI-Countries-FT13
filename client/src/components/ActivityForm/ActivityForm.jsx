@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCountriesForActivities } from '../../actions'
 import { Link } from "react-router-dom"
+import axios from 'axios'
+import { BACKENDURL } from '../../constants'
 
 const ActivityForm = () => {
     const [input, setInput] = useState({
@@ -11,7 +13,9 @@ const ActivityForm = () => {
         season: '',
         description: '',
         duration: '',
-        countryId: '',
+        countryId: {
+            id: ''
+        },
         countriesIds: []
       });
 
@@ -32,32 +36,84 @@ const ActivityForm = () => {
     const handleChange = (e) => {
         e.preventDefault()
         const { value, name } = e.target;
-        setInput({
-            ...input,
-            [name]: value
-        });
+        if(name === 'countryId') {
+            setInput({
+                ...input,
+                [name]: {
+                    id: value,
+                    name: e.target.selectedOptions[0].text
+                }
+            });
+        } else {
+            setInput({
+                ...input,
+                [name]: value
+            });
+        }
     }
 
-    const submitForm = (e) => {}
+    const submitForm = async (e) => {
+        e.preventDefault()
+        const countries = input.countriesIds.map(country => country.id)
+        const body = {
+            name: input.name,
+            difficult: input.difficult !== '' ? parseInt(input.difficult) : null,
+            duration: input.duration !== '' ? parseInt(input.duration) : null,
+            season: input.season !== '' ? input.season : null,
+            description: input.description !== '' ? input.description : null,
+            countries 
+        }
+        try {
+            const {data} = await axios.post(`${BACKENDURL}/activity`, body)
+            alert(data)
+            setInput({
+                name: '',
+                difficult: '',
+                season: '',
+                description: '',
+                duration: '',
+                countryId: {
+                    id: ''
+                },
+                countriesIds: []
+              })
+        } catch(err) {
+            alert(err.response.data)
+            console.error(err)
+        }
+    }
 
     const addCountry = (e) => {
         e.preventDefault()
-        const id = input.countryId
+        const countryToAdd = input.countryId
         const countriesIds = input.countriesIds
-        if(!countriesIds.includes(id) && id !== '') {
-            countriesIds.push(id)
+        const exist = countriesIds.find(country => country.id === countryToAdd.id)
+        if(!exist && countryToAdd.id !== '') {
+            countriesIds.push(countryToAdd)
             setInput({
                 ...input,
                 countriesIds,
-                countryId: ''
+                countryId: {
+                    id: ''
+                }
             })
         }
         else {
             setInput({
                 ...input,
-                countryId: ''
+                countryId: {
+                    id: ''
+                }
             })
         }
+    }
+
+    const deleteCountry = (id) => {
+        const countriesIds = input.countriesIds.filter(country => country.id !== id)
+        setInput({
+            ...input,
+            countriesIds
+        })
     }
     
     return (
@@ -101,7 +157,7 @@ const ActivityForm = () => {
                         <span>Paises en donde se puede realizar la actividad</span>
                         <select
                         name="countryId"
-                        value={input.countryId}
+                        value={input.countryId.id}
                         onChange={handleChange}>
                             <option value=''></option>
                             {countriesForActivities && countriesForActivities.map(country => 
@@ -110,25 +166,41 @@ const ActivityForm = () => {
                         </select>
                         <button onClick={(e) => addCountry(e)}>Añadir pais</button>
                     </div>
-                    {/*<div className='activityform-countries'>
-                            {countriesIds.map((countryId) => (
-                                <span className='activityform-countries-item'>
-                                    {`${countryId[1]} `}
-                                    <button className='activityform-countries-item-delete' onClick={(e) => {e.preventDefault()
-                                        removeCountryId(countryId[0])}}>X</button>
+                    <div className='activityform-countries'>
+                        <p>Paises añadidos</p>
+                            {input.countriesIds.map((country) => (
+                                <span className='activityform-countries-item' key={country.id}>
+                                    {`${country.name} `}
+                                    <button className='activityform-countries-item-delete'
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        deleteCountry(country.id)
+                                    }}>
+                                        Quitar
+                                    </button>
                                 </span>
                             ))}
-                    </div>*/}
+                    </div>
                     <div className='activityform-submit'>
                         {
-                            error.length !== 0 ? (<span className='activityform-error'>{error}</span>) : (<input className='activityform-submit-button' type="submit" value="Enviar actividad"/>)
+                            error.length !== 0 ? 
+                            <span className='activityform-error'>{error}</span> : 
+                            <input className='activityform-submit-button'
+                            type="submit"
+                            value="Enviar actividad"
+                            onClick={(e) => submitForm(e)}/>
                         } 
                     </div>
                 </form>
             </div>
-            <Link to='/home'>
-                Regresar al home
-            </Link>
+            <div>
+                <Link to='/home'>
+                    Regresar al home
+                </Link>
+                <Link to='/activities'>
+                    Regresar a actividades
+                </Link>
+            </div>
         </div>
     )
 }

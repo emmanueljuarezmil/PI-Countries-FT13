@@ -1,4 +1,4 @@
-const { Activity } = require('../db')
+const { Activity, Country } = require('../db')
 
 const exclude = ['createdAt', 'updatedAt']
 
@@ -7,6 +7,13 @@ const getActivites = async (req, res, next) => {
         const activities = await Activity.findAll({
             attributes: {
                 exclude
+            },
+            include: {
+                model: Country,
+                attributes: ['name', 'id', 'flag'],
+                through: {
+                    attributes: []
+                }
             }
         })
         return res.send(activities)

@@ -7,6 +7,7 @@ import {
     SET_ORDER_BY,
     SET_ORDER_TYPE,
     GET_ACTIVITIES,
+    GET_ACTIVITIES_FOR_SEARCH_BAR,
     SET_ACTIVITY_FILTER,
     GET_COUNTRY_DETAIL,
     SET_CONTINENT_FILTER,
@@ -47,6 +48,20 @@ export const getActivities = () => {
         const { data } = await axios.get(`${BACKENDURL}/activity`)
         dispatch({
           type: GET_ACTIVITIES,
+          payload: data
+        })
+    } catch (err) {
+        console.error(err)
+    }
+  }
+}
+
+export const getActivitiesForSearchBar = () => {
+  return async (dispatch) => {
+    try {
+        const { data } = await axios.get(`${BACKENDURL}/activitySearchBar`)
+        dispatch({
+          type: GET_ACTIVITIES_FOR_SEARCH_BAR,
           payload: data
         })
     } catch (err) {

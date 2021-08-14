@@ -24,6 +24,20 @@ const validateCountries = async (countries) => {
     return false
 }
 
+const validateName = async (name) => {
+        try {
+            const verifyName = await Activity.findOne({
+                where: {
+                    name
+                }
+            })
+            if (verifyName) return true
+        } catch(err) {
+            console.error(err)
+        }
+    return false
+}
+
 const postActivity = async (req,res,next) => {
     const { name = null, difficult = null, duration = null, season, description = null, countries } = req.body
 
@@ -31,6 +45,13 @@ const postActivity = async (req,res,next) => {
         return next({
             status: 400,
             message: 'Los parametros enviados son incorrectos'
+        })
+    }
+
+    if( await validateName(name) ) {
+        return next({
+            status: 400,
+            message: 'Ya existe una actividad con el nombre ingresado'
         })
     }
 
@@ -51,22 +72,7 @@ const postActivity = async (req,res,next) => {
             season,
             description})
         await activity.setCountries(countries)
-        
-        const activitySend = await Activity.findOne({
-            where: {
-                id: activity.id
-            },
-            include: {
-                model: Country,
-                through: {
-                  attributes: []
-                }
-            },
-            attributes: {
-                exclude
-            }
-        })
-        return res.send(activitySend)
+        return res.send('Actividad creada con éxito')
     }
     catch(err) {
         return next(err)

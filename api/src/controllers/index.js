@@ -3,6 +3,7 @@ const getCountries = require('./getCountries')
 const getCountryById = require('./getCountryById')
 const postActivity = require('./postActivity')
 const getActivites = require('./getActivities')
+const getActivitesForSearchBar = require('./getActivitiesForSearchBar')
 const getCountriesForActivities = require('./getCountriesForActivities')
 
 module.exports = {
@@ -11,5 +12,6 @@ module.exports = {
     getCountryById,
     postActivity,
     getActivites,
-    getCountriesForActivities
+    getCountriesForActivities,
+    getActivitesForSearchBar
 }
