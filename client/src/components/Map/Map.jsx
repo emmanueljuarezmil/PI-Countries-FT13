@@ -10,9 +10,11 @@ const Map = ({lat, lng}) => {
     return (
         <GoogleMap
         defaultZoom={4}
-        center={{lat: parseInt(lat), lng: parseInt(lng)}}>
+        center={{lat: parseInt(lat), lng: parseInt(lng)}}
+        >
             <Marker
-            position={{lat: parseInt(lat), lng: parseInt(lng)}}/>
+            position={{lat: parseInt(lat), lng: parseInt(lng)}}
+            />
         </GoogleMap>
     )
 }

@@ -11,13 +11,34 @@ import Activities from './components/Activities/Activities';
 function App() {
   return (
     <div className="App">
-      <Route path='/' component={Nav}/>
-      <Route exact path="/" component={Landing} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/countryDetail" component={CountryDetail} />
-      <Route exact path="/activities" component={Activities} />
-      <Route exact path="/newactivity" component={ActivityForm} />
-      <Route path='/' component={Footer}/>
+      <Route
+      path='/' 
+      component={Nav}
+      />
+      <Route 
+      exact path="/" 
+      component={Landing} 
+      />
+      <Route 
+      exact path="/home" 
+      component={Home} 
+      />
+      <Route 
+      exact path="/countryDetail" 
+      component={CountryDetail} 
+      />
+      <Route 
+      exact path="/activities" 
+      component={Activities} 
+      />
+      <Route 
+      exact path="/newactivity" 
+      component={ActivityForm} 
+      />
+      <Route 
+      path='/' 
+      component={Footer}
+      />
     </div>
   );
 }

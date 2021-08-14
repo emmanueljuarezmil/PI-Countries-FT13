@@ -14,7 +14,15 @@ import {
     GET_COUNTRIES_FOR_ACTIVITIES
 } from '../constants'
 
-export const getCountries = ( name, orderBy, orderType, page, itemsPerPage, activityFilter, continentFilter ) => {
+export const getCountries = ( 
+  name,
+  orderBy,
+  orderType,
+  page,
+  itemsPerPage,
+  activityFilter,
+  continentFilter
+  ) => {
   return async (dispatch) => {
     try {
         const { data } = await axios.get(`${BACKENDURL}/countries?name=${name}&orderBy=${orderBy}&orderType=${orderType}&page=${page}&itemsPerPage=${itemsPerPage}&activityFilter=${activityFilter}&continentFilter=${continentFilter}`)

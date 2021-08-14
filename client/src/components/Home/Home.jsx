@@ -1,7 +1,7 @@
 import './Home.css'
 import React, { useEffect } from 'react'
 import CountryCardsContainer from '../CountryCardsContainer/CountryCardsContainer'
-import { getCountries } from '../../actions'
+import { getCountries, setCurrentPage } from '../../actions'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from '../SearchBar/SearchBar'
 import Paginater from '../Paginater/Paginater'
@@ -16,6 +16,12 @@ const Home = () => {
     const orderType = useSelector(state => state.orderType)
     const activityFilter = useSelector(state => state.activityFilter)
     const continentFilter = useSelector(state => state.continentFilter)
+    const totalPages = useSelector(state => state.totalPages)
+
+    const setPage = (e) => {
+        e.preventDefault()
+        dispatch(setCurrentPage(parseInt(e.target.value)))
+    }
 
     useEffect(() => {
         dispatch(getCountries( searchedCountries, orderBy, orderType, page, itemsPerPage, activityFilter, continentFilter ))
@@ -25,7 +31,11 @@ const Home = () => {
         <div>
             <SearchBar/>
             <CountryCardsContainer/>
-            <Paginater/>
+            <Paginater 
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            />
         </div>
     )
 }

@@ -10,7 +10,8 @@ const CountryCard = ({country}) => {
     return (
         <div>
             {name}
-            <Link onClick={() => dispatch(getCountryDetail(id))}
+            <Link
+            onClick={() => dispatch(getCountryDetail(id))}
             to='/countryDetail'>
                 Ver mas
             </Link>

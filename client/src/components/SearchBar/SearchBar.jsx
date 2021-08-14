@@ -37,50 +37,75 @@ const SearchBar = () => {
 
     return (
         <div>
-            <input type="text"
+            <input 
+            type="text"
             value={currentSearch}
             onChange={e => {
                 dispatch(setSearch(e.target.value))
                 dispatch(setCurrentPage(1))
-            }}/>
-            <select name="orderBy" 
+            }}
+            />
+            <select 
+            name="orderBy" 
             value={orderBy}
             onChange={e => {
                 dispatch(setOrderBy(e.target.value))
-                dispatch(setCurrentPage(1))}}>
+                dispatch(setCurrentPage(1))}}
+            >
                 <option value="name">Nombres</option>
                 <option value="poblation">Población</option>
                 <option value="area">Superficie</option>
             </select>
-            <select name="orderType" 
+            <select 
+            name="orderType" 
             value={orderType}
             onChange={e => {
                 dispatch(setOrderType(e.target.value))
-                dispatch(setCurrentPage(1))}}>
+                dispatch(setCurrentPage(1))}}
+            >
                 <option value="ASC">Ascendente</option>
                 <option value="DESC">Descendente</option>
             </select>
-            <select name="continentFilter"
+            <select 
+            name="continentFilter"
             value={continentFilter}
             onChange={e => {
                 dispatch(setContinentFilter(e.target.value))
-                dispatch(setCurrentPage(1))}}>
+                dispatch(setCurrentPage(1))}}
+            >
                 <option value="">Todos</option>
                 {
-                    continents && continents.map((continent, index) => <option value={continent} key={index}>{continent}</option>)
+                    continents && continents.map((continent, index) => 
+                    <option 
+                    value={continent} 
+                    key={index}
+                    >
+                        {continent}
+                    </option>
+                    )
                 }
             </select>
-            <select name="setActivityFilter" 
+            <select 
+            name="setActivityFilter" 
             onChange={e => {
                 dispatch(setActivityFilter(e.target.value))
                 dispatch(setCurrentPage(1))}}
-            value={activityFilter}>
+            value={activityFilter}
+            >
                 <option value="">Ninguna</option>
                 {
-                    activitiesForSearchBar && activitiesForSearchBar.map((activity, index) => <option key={index} value={activity.id}>{activity.name}</option>)
+                    activitiesForSearchBar && activitiesForSearchBar.map((activity, index) => 
+                    <option 
+                    key={index} 
+                    value={activity.id}>
+                        {activity.name}
+                    </option>
+                    )
                 }
             </select>
-            <button onClick={() => clearSearch()}>Eliminar filtros y búsqueda</button>
+            <button onClick={() => clearSearch()}>
+                Eliminar filtros y búsqueda
+            </button>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getActivities } from '../../actions'
 import ActivityCard from '../ActivityCard/ActivityCard';
+import Paginater from '../Paginater/Paginater';
 
 const Activities = () => {
     const dispatch = useDispatch()
@@ -14,31 +15,32 @@ const Activities = () => {
 
     const activities = useSelector(state => state.activities)
 
-    const [page, setPage] = useState(1)
+    const [page, setCurrentPage] = useState(1)
     const activitiesPerPage = 2
     const totalPages = Math.ceil(activities.length / activitiesPerPage)
-    const activitiesRender = activities.slice((page - 1) * activitiesPerPage, page * activitiesPerPage)
+    const activitiesToRender = activities.slice((page - 1) * activitiesPerPage, page * activitiesPerPage)
 
-    const setCurrentPage = (e) => {
+    const setPage = (e) => {
         e.preventDefault()
-        setPage(parseInt(e.target.value))
+        setCurrentPage(parseInt(e.target.value))
     }
 
     return (
         <div>
             <div>
                 {
-                    activitiesRender && activitiesRender.map(activity => <ActivityCard activity={activity} key={activity.id}/>)
+                    activitiesToRender && activitiesToRender.map(activity => 
+                    <ActivityCard 
+                    activity={activity} 
+                    key={activity.id}
+                    />)
                 }
             </div>
-            <div>
-                <button value={1} onClick={setCurrentPage} disabled={ page === 1 }>{"|<"}</button>
-                <button value={page - 1} onClick={setCurrentPage} disabled={ page === 1 }>{"<<"}</button>
-                <span>{page}</span>
-                <button value={page + 1} onClick={setCurrentPage} disabled={ page === totalPages }>{">>"}</button>
-                <button value={totalPages} onClick={setCurrentPage} disabled={ page === totalPages }>{">|"}</button>
-                <span>de {totalPages}</span>
-            </div>
+            <Paginater 
+            page={page}
+            totalPages={totalPages}
+            setPage={setPage}
+            />
             <div>
                 <Link to="/newactivity">Ingresar actividad</Link>
                 <Link to="/home">Regresar al home</Link>

@@ -8,7 +8,12 @@ const CountryCardsContainer = () => {
     return (
         <div>
             {
-                countries.length && countries.map(country => <CountryCard country={country} key={country.id}/>)
+                countries.length && countries.map(country => 
+                <CountryCard 
+                country={country} 
+                key={country.id}
+                />
+                )
             }
         </div>
     )

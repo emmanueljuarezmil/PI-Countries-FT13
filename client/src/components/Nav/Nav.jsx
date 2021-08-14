@@ -7,16 +7,40 @@ const Nav = () => {
     return (
         <div className='nav'>
             <div className='nav-img'>
-                <a href="https://www.soyhenry.com" target="_blank" rel="noopener noreferrer">
+                <a
+                href="https://www.soyhenry.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                >
                     <img src={logoHenry} alt="" />
                 </a>
             </div>
             <div className='nav-links'>
-                <NavLink to="/home" activeClassName="nav-link-active" className='nav-link'>HOME</NavLink>
-                <NavLink to="/activities" activeClassName="nav-link-active" className='nav-link'>ACTIVIDADES</NavLink>
-                <NavLink to="/about" activeClassName="nav-link-active" className='nav-link'>ABOUT</NavLink>
+                <NavLink 
+                to="/home" 
+                activeClassName="nav-link-active" 
+                className='nav-link'
+                >
+                    HOME
+                </NavLink>
+                <NavLink 
+                to="/activities" 
+                activeClassName="nav-link-active" 
+                className='nav-link'
+                >
+                    ACTIVIDADES
+                </NavLink>
+                <NavLink 
+                to="/about" 
+                activeClassName="nav-link-active" 
+                className='nav-link'
+                >
+                    ABOUT
+                </NavLink>
             </div>
-            <span className='nav-text'>Proyecto Individual FT13</span>
+            <span className='nav-text'>
+                Proyecto Individual FT13
+            </span>
         </div>
     )
 }
