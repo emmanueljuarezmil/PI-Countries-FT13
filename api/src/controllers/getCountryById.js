@@ -14,6 +14,13 @@ const getCountryById = async (req,res,next) => {
                 },
                 through: {
                   attributes: []
+                },
+                include: {
+                    model: Country,
+                    attributes: ['name', 'id', 'flag'],
+                    through: {
+                        attributes: []
+                    }
                 }
             },
             attributes: {
