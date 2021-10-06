@@ -2,19 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Carousel.css";
 
 const Carousel = ({items, n}) => {
-    // const items = [
-    //     'ola',
-    //     'asd',
-    //     'x',
-    //     'c',
-    //     'w',
-    //     'asd',
-    //     'as',
-    //     'asd',
-    //     'zxc',
-    //     'asd',
-    // ]
-    // const n = 2
     const [slide, setSlide] = useState(1)
     const totalSlides = Math.ceil( items.length / n )
     const [itemsToShow, setItemsToShow] = useState( items.slice((slide - 1) * n, slide * n) )

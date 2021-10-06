@@ -6,7 +6,7 @@ import logoHenry from '../../img/logoHenry.png'
 const Nav = () => {
     return (
         <div className='nav'>
-            <div className='nav-img'>
+            <div className='nav-img nav-item'>
                 <a
                 href="https://www.soyhenry.com" 
                 target="_blank" 
@@ -15,7 +15,7 @@ const Nav = () => {
                     <img src={logoHenry} alt="" />
                 </a>
             </div>
-            <div className='nav-links'>
+            <div className='nav-links nav-item'>
                 <NavLink 
                 to="/home" 
                 activeClassName="nav-link-active" 
@@ -38,7 +38,7 @@ const Nav = () => {
                     ABOUT
                 </NavLink>
             </div>
-            <span className='nav-text'>
+            <span className='nav-text nav-item'>
                 Proyecto Individual FT13
             </span>
         </div>

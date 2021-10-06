@@ -3,14 +3,14 @@ const axios = require('axios')
 
 const getAllCountriesFromApi = async () => {
     try {
-        const { data } = await axios.get('https://restcountries.eu/rest/v2/all')
+        const { data } = await axios.get('https://restcountries.com/v3/all')
         for( let country of data ) {
             await Country.create({
-                id: country.alpha3Code,
-                name: country.translations.es ? country.translations.es : country.name,
-                flag: country.flag,
+                id: country.cca3,
+                name: country.name.common,
+                flag: country.flags[1],
                 continent: country.region !== '' ? country.region : 'Otros',
-                capital: country.capital,
+                capital: country.capital ? country.capital[0] : 'No especificada',
                 subregion: country.subregion,
                 area: country.area ? country.area : 0,
                 poblation: country.population,
