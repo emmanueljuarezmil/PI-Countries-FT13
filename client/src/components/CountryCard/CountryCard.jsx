@@ -5,17 +5,16 @@ import { getCountryDetail } from '../../actions'
 import { Link } from "react-router-dom"
 
 const CountryCard = ({country}) => {
-    const { name, id } = country
+    const { name, id, flag } = country
     const dispatch = useDispatch()
     return (
-        <div>
-            {name}
-            <Link
-            onClick={() => dispatch(getCountryDetail(id))}
-            to='/countryDetail'>
-                Ver mas
-            </Link>
-        </div>
+        <Link
+        onClick={() => dispatch(getCountryDetail(id))}
+        to='/countryDetail'>
+            <div style={{ backgroundImage: `url(${flag})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <span>{name}</span>
+            </div>
+        </Link> 
     )
 }
 
