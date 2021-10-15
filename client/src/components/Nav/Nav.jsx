@@ -7,6 +7,7 @@ const Nav = () => {
     return (
         <div className='nav'>
             <div className='nav-img nav-item'>
+                <span>App realizada en: </span>
                 <a
                 href="https://www.soyhenry.com" 
                 target="_blank" 
@@ -19,27 +20,24 @@ const Nav = () => {
                 <NavLink 
                 to="/home" 
                 activeClassName="nav-link-active" 
-                className='nav-link'
-                >
+                className='nav-link'>
                     HOME
                 </NavLink>
                 <NavLink 
                 to="/activities" 
                 activeClassName="nav-link-active" 
-                className='nav-link'
-                >
+                className='nav-link'>
                     ACTIVIDADES
                 </NavLink>
                 <NavLink 
                 to="/about" 
                 activeClassName="nav-link-active" 
-                className='nav-link'
-                >
+                className='nav-link'>
                     ABOUT
                 </NavLink>
             </div>
             <span className='nav-text nav-item'>
-                Proyecto Individual FT13
+                Dark Mode
             </span>
         </div>
     )
