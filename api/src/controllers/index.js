@@ -5,6 +5,7 @@ const postActivity = require('./postActivity')
 const getActivites = require('./getActivities')
 const getActivitesForSearchBar = require('./getActivitiesForSearchBar')
 const getCountriesForActivities = require('./getCountriesForActivities')
+const chargeInitialActivities = require('./chargeInitialActivities')
 
 module.exports = {
     getAllCountriesFromApi,
@@ -13,5 +14,6 @@ module.exports = {
     postActivity,
     getActivites,
     getCountriesForActivities,
-    getActivitesForSearchBar
+    getActivitesForSearchBar,
+    chargeInitialActivities
 }

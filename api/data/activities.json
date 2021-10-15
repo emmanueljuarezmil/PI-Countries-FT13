@@ -1,0 +1,64 @@
+[
+    {
+        "name": "Esquí",
+        "difficult": "4",
+        "duration": "120",
+        "season": "Invierno",
+        "description": "El esquí es un deporte de montaña que consiste en el deslizamiento por la nieve, por medio de dos tablas sujetas a la suela de las botas del esquiador mediante fijaciones mecanicorrobóticas, con múltiples botones con diversas funciones."
+    },
+    {
+        "name": "Pesca",
+        "difficult": "2",
+        "duration": "180",
+        "description": "La pesca se define como aquella actividad que se realiza para extraer peces. Puede realizarse en aguas continentales o marítimas."
+    },
+    {
+        "name": "Ciclismo",
+        "difficult": "2",
+        "duration": "60",
+        "season": "Verano"
+    },
+    {
+        "name": "Visitas guiadas a parques nacionales",
+        "difficult": "2",
+        "duration": "180"
+    },
+    {
+        "name": "Trekking",
+        "difficult": "3",
+        "duration": "240",
+        "season": "Verano",
+        "description": "Excursionismo, del vocablo excursio que significa “viaje corto”, compuesto por el prefijo ex, el verbo currere, del sufijo –sión e ismo del latín ismus, indica la acción de desplazarse de un lugar a otro en forma de visita, paseo, recorrido o travesía, tanto con fines académicos como recreativos.​"
+    },
+    {
+        "name": "Buceo",
+        "difficult": "4",
+        "duration": "180",
+        "description": "El buceo, también denominado submarinismo y escafandrismo, es el acto por medio del cual el ser humano se sumerge en cuerpos de agua, ya sea el mar, un lago, un río, una cantera inundada o una piscina, con el fin de desarrollar una actividad profesional, recreativa, de investigación científica o militar con o sin ayuda de equipos especiales."
+    },
+    {
+        "name": "Clubes nocturnos y bailables",
+        "difficult": "1"
+    },
+    {
+        "name": "Visitas a museos",
+        "difficult": "1",
+        "duration": "120"
+    },
+    {
+        "name": "Parques de diversion",
+        "difficult": "1",
+        "duration": "240"
+    },
+    {
+        "name": "Gastronomia local",
+        "difficult": "1",
+        "duration": "120"
+    },
+    {
+        "name": "Visitas a monumentos historicos",
+        "difficult": "2",
+        "duration": "180",
+        "description": "Visitas guiadas a monumentos históricos locales."
+    }
+]
