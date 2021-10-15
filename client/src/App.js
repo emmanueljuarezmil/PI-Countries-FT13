@@ -7,6 +7,7 @@ import Home from './components/Home/Home'
 import CountryDetail from './components/CountryDetail/CountryDetail'
 import ActivityForm from './components/ActivityForm/ActivityForm';
 import Activities from './components/Activities/Activities';
+import About from './components/About/About';
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
       <Route 
       exact path="/newactivity" 
       component={ActivityForm} 
+      />
+      <Route 
+      exact path="/about" 
+      component={About} 
       />
       <Route 
       path='/' 

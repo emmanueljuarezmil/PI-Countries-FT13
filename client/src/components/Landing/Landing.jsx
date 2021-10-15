@@ -1,10 +1,11 @@
 import './Landing.css'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Landing = () => {
     return (
         <div>
-            ola soy la Landing
+            <Link to="/home">Ingresar</Link>
         </div>
     )
 }
