@@ -2,11 +2,11 @@ import './CountryDetail.css'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
-import Carousel from '../Carousel/Carousel'
 import ActivityCard from '../ActivityCard/ActivityCard'
+import CountryCard from '../CountryCard/CountryCard'
+import Carousel from '../Carousel/Carousel'
 
 const CountryDetail = () => {
-
     const { 
         name,
         flag,
@@ -17,18 +17,24 @@ const CountryDetail = () => {
         poblation,
         lat,
         lng,
-        activities
+        activities,
+        nearbyCountries = []
     } = useSelector(state => state.countryDetail)
+    console.log('Entro a countrydetail')
 
-    const carouselItems = 
-    activities ? 
-    activities.map(activity =>
+    const carouselActivityItems = activities.map(activity =>
         <ActivityCard
         activity={activity}
         key={activity.id}
         />      
     )
-    : []
+
+    const carouselNearbyCountriesItems = nearbyCountries.map(country => 
+        <CountryCard
+        country={country}
+        key={country.id}
+        />
+    )
 
     const roundAndFix = (number, string) => {
         return number >= 1000 ?
@@ -56,7 +62,14 @@ const CountryDetail = () => {
             <a href={`https://www.google.com.ar/maps/@${lat},${lng},6z`} target="_blank" rel="noopener noreferrer">Ver en Google Maps</a>
             <div>
                 <Carousel
-                items={carouselItems}
+                items={carouselActivityItems}
+                n={2}
+                />
+            </div>
+            <div>
+                <h3>Paises cercanos a {name} que pueden interesarte:</h3>
+                <Carousel
+                items={carouselNearbyCountriesItems}
                 n={2}
                 />
             </div>

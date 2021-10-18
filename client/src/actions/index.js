@@ -84,7 +84,10 @@ export const getCountryDetail = (id) => {
         const { data } = await axios.get(`${BACKENDURL}/countries/${id}`)
         dispatch({
           type: GET_COUNTRY_DETAIL,
-          payload: data
+          payload: {
+            ...data.country,
+            nearbyCountries: data.nearbyCountries
+          }
         })
     } catch (err) {
         console.error(err)

@@ -1,5 +1,5 @@
 import React from 'react'
-import CarouselCountryItem from '../CarouselCountryItem/CarouselCountryItem';
+import CountryCard from '../CountryCard/CountryCard';
 import Carousel from '../Carousel/Carousel';
 
 const ActivityCard = ({activity}) => {
@@ -19,14 +19,13 @@ const ActivityCard = ({activity}) => {
         'Muy dificil',
     ]
 
-    const carouselItems = countries.map(country =>
-        <CarouselCountryItem
-        flag={country.flag}
-        name={country.name}
-        id={country.id}
+    const carouselItems = countries ? 
+    countries.map(country =>
+        <CountryCard
+        country={country}
         key={country.id}
         />
-    )
+    ) : []
 
     
     return (

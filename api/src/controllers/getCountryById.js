@@ -40,7 +40,8 @@ const getCountryById = async (req,res,next) => {
                         lng: {
                             [Op.between]: [parseInt(country.lng) - latAndLngDifference, parseInt(country.lng) + latAndLngDifference]
                         }
-                    }
+                    },
+                    attributes: ['name', 'id', 'flag', 'lat', 'lng']
                 })
                 latAndLngDifference += 2
             }
