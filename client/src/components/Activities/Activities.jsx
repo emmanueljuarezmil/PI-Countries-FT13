@@ -16,7 +16,7 @@ const Activities = () => {
     const activities = useSelector(state => state.activities)
 
     const [page, setCurrentPage] = useState(1)
-    const activitiesPerPage = 2
+    const activitiesPerPage = 9
     const totalPages = Math.ceil(activities.length / activitiesPerPage)
     const activitiesToRender = activities.slice((page - 1) * activitiesPerPage, page * activitiesPerPage)
 

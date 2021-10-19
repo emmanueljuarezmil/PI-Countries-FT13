@@ -5,7 +5,7 @@ const exclude = ['createdAt', 'updatedAt']
 const validateActivity = (name, difficult, duration, season, countries) => {
     const seasons = ['Verano', 'Otoño', 'Primavera', 'Invierno']
     if(!name || typeof name !== 'string') return true
-    if(difficult && (typeof difficult !== 'number' || difficult < 1 || difficult > 5)) return true
+    if(!difficult || difficult && (typeof difficult !== 'number' || difficult < 1 || difficult > 5)) return true
     if(duration && (typeof duration !== 'number' || duration < 0)) return true
     if(season && !seasons.includes(season)) return true
     if(!Array.isArray(countries) || countries.length === 0) return true

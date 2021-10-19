@@ -2,7 +2,7 @@ import React from 'react'
 import CountryCard from '../CountryCard/CountryCard';
 import Carousel from '../Carousel/Carousel';
 
-const ActivityCard = ({activity}) => {
+const ActivityCard = ({activity, mini}) => {
     const {
         name,
         description,
@@ -19,25 +19,34 @@ const ActivityCard = ({activity}) => {
         'Muy dificil',
     ]
 
-    const carouselItems = countries ? 
+    const carouselCountriesItems = !mini ?
     countries.map(country =>
         <CountryCard
         country={country}
         key={country.id}
         />
-    ) : []
+    ) : 
+    null
 
     
     return (
         <div>
             <p>{name}</p>
-            <p>{description}</p>
             <p>{difficults[difficult - 1]}</p>
             <p>{duration}</p>
-            <Carousel
-            items={carouselItems}
-            n={5}
-            />        
+            {
+                !mini ?
+                <p>{description}</p> :
+                null
+            }
+            {
+                !mini ?
+                <Carousel
+                items={carouselCountriesItems}
+                n={5}
+                /> :
+                null      
+            }
         </div>
     )
 }

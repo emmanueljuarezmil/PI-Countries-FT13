@@ -1,5 +1,6 @@
 const { Country, Activity } = require('../db')
 const { Op } = require('sequelize')
+const { query } = require('express')
 
 const exclude = ['createdAt', 'updatedAt']
 
@@ -18,7 +19,7 @@ const getCountries = async (req,res,next) => {
     orderBy = orderBy !== 'undefined' ? orderBy : 'name'
     orderType = orderType !== 'undefined' ? orderType : 'ASC'
     page = page !== 'undefined' ? parseInt(page) : 1
-    itemsPerPage = itemsPerPage !== 'undefined' ? parseInt(itemsPerPage) : 10
+    itemsPerPage = itemsPerPage !== 'undefined' ? parseInt(itemsPerPage) : 9
     activityFilter = activityFilter !== 'undefined' ? activityFilter : ''
     continentFilter = continentFilter !== 'undefined' ? continentFilter : ''
 
@@ -29,11 +30,12 @@ const getCountries = async (req,res,next) => {
         })
     }
 
-    const where = {}
-    name ? where.name = {[Op.iLike]: `%${name}%`} : null
-    continentFilter !== '' ? where.continent = continentFilter : null
-
+    
     try {
+        const where = {}
+        name ? where.name = {[Op.iLike]: `%${name}%`} : null
+        continentFilter !== '' ? where.continent = continentFilter : null
+
         const queryConfig = {
             where,
             include: {
@@ -52,11 +54,15 @@ const getCountries = async (req,res,next) => {
             attributes: {
                 exclude: [...exclude, 'capital', 'subregion']
             },
-            order: [[orderBy, orderType]],
-            offset: (page - 1) * itemsPerPage,
-            limit: itemsPerPage
+            order: [[orderBy, orderType]]
         }
-        const countries = await Country.findAndCountAll(queryConfig)
+        const totalItems = await Country.findAll(queryConfig)
+        const totalPages = Math.ceil(Object.values(totalItems).length / itemsPerPage)
+
+        queryConfig.offset = (page - 1) * itemsPerPage
+        queryConfig.limit = itemsPerPage
+
+        const countries = await Country.findAll(queryConfig)
 
         const countriesContinents = await Country.findAll({
             attributes: ['continent']
@@ -65,8 +71,8 @@ const getCountries = async (req,res,next) => {
         const continents = [...new Set(countriesContinents.map(country => country.continent))]
         
         return res.send({
-            countries: countries.rows,
-            totalPages: Math.ceil(countries.count / itemsPerPage),
+            countries,
+            totalPages,
             continents
         })
     } catch(err) {

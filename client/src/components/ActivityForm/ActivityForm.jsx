@@ -19,18 +19,18 @@ const ActivityForm = () => {
         countriesIds: []
       });
 
-    const [error, setError] = useState('Debes ingresar una actividad y al menos un pais');
+    const [error, setError] = useState('Debes ingresar nombre, dificultad y al menos un pais');
 
     const dispatch = useDispatch()
     const countriesForActivities = useSelector(state => state.countriesForActivities)
 
     useEffect(() => {
-        if(!countriesForActivities.length) dispatch(getCountriesForActivities())
+        if (!countriesForActivities.length) dispatch(getCountriesForActivities())
     },[dispatch, countriesForActivities])
 
     useEffect(() => {
-        if(!input.name.length || !input.countriesIds.length) setError('Debes ingresar al menos el nombre de la actividad y un pais')
-        if(input.name.length && input.countriesIds.length) setError('')
+        if (!input.name.length || !input.countriesIds.length || !input.difficult) setError('Debes ingresar nombre, dificultad y al menos un pais')
+        else setError('')
     },[input, input.countriesIds])
 
     const handleChange = (e) => {
@@ -56,15 +56,15 @@ const ActivityForm = () => {
         e.preventDefault()
         const countries = input.countriesIds.map(country => country.id)
         const body = {
+            countries,
             name: input.name,
             difficult: input.difficult !== '' ? parseInt(input.difficult) : null,
             duration: input.duration !== '' ? parseInt(input.duration) : null,
             season: input.season !== '' ? input.season : null,
-            description: input.description !== '' ? input.description : null,
-            countries 
+            description: input.description !== '' ? input.description : null
         }
         try {
-            const {data} = await axios.post(`${BACKENDURL}/activity`, body)
+            const { data } = await axios.post(`${BACKENDURL}/activity`, body)
             alert(data)
             setInput({
                 name: '',
@@ -121,7 +121,7 @@ const ActivityForm = () => {
             <div className='activityform-form'>
                 <form onSubmit={(e) => {submitForm(e)}}>
                     <div className='activityform-form-item'>
-                        <span>Nombre de la actividad</span>
+                        <span>Nombre*</span>
                         <input
                         type="text"
                         name="name"
@@ -130,7 +130,7 @@ const ActivityForm = () => {
                         />
                     </div>
                      <div className='activityform-form-item'>
-                        <span htmlFor="name">Duración de la actividad (minutos)</span>
+                        <span htmlFor="name">Duración (minutos)</span>
                         <input 
                         type="number"
                         name="duration" 
@@ -140,7 +140,7 @@ const ActivityForm = () => {
                         />
                     </div>
                     <div className='activityform-form-item'>
-                        <span>Dificultad</span>
+                        <span>Dificultad*</span>
                         <select 
                         name="difficult" 
                         value={input.difficult} 
@@ -155,7 +155,7 @@ const ActivityForm = () => {
                         </select>
                     </div>
                     <div className='activityform-form-item'>
-                        <span>Temporada en que se puede realizar</span>
+                        <span>Temporada</span>
                         <select 
                         name="season" 
                         value={input.season} 
@@ -169,7 +169,7 @@ const ActivityForm = () => {
                         </select>
                     </div>
                     <div className='activityform-form-item'>
-                        <span>Descripción de la actividad</span>
+                        <span>Descripción</span>
                         <input 
                         type="text" 
                         name="description" 
@@ -177,7 +177,7 @@ const ActivityForm = () => {
                         onChange={handleChange}/>
                     </div>
                     <div className='activityform-form-item'>
-                        <span>Paises en donde se puede realizar la actividad</span>
+                        <span>Paises*</span>
                         <select
                         name="countryId"
                         value={input.countryId.id}

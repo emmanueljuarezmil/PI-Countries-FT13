@@ -17,14 +17,14 @@ const CountryDetail = () => {
         poblation,
         lat,
         lng,
-        activities,
+        activities = [],
         nearbyCountries = []
     } = useSelector(state => state.countryDetail)
-    console.log('Entro a countrydetail')
 
     const carouselActivityItems = activities.map(activity =>
         <ActivityCard
         activity={activity}
+        mini={true}
         key={activity.id}
         />      
     )

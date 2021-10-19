@@ -8,7 +8,7 @@ import Paginater from '../Paginater/Paginater'
 
 const Home = () => {
     const dispatch = useDispatch()
-    const itemsPerPage = 10
+    const itemsPerPage = 9
 
     const page = useSelector(state => state.currentPage)
     const searchedCountries = useSelector(state => state.searchedCountries)

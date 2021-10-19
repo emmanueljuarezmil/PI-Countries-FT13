@@ -5,7 +5,6 @@ import { getCountryDetail } from '../../actions'
 import { Link } from "react-router-dom"
 
 const CountryCard = ({country}) => {
-    console.log('country que recibe card: ', country)
     const { name, id, flag } = country
     const dispatch = useDispatch()
     return (
