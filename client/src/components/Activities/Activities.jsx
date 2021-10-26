@@ -42,7 +42,7 @@ const Activities = () => {
             setPage={setPage}
             />
             <div>
-                <Link to="/newactivity">Ingresar actividad</Link>
+                <Link to="/newactivity">Crear actividad</Link>
                 <Link to="/home">Regresar al home</Link>
             </div>
         </div>

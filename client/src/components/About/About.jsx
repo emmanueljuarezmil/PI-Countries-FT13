@@ -3,7 +3,7 @@ import React from 'react'
 import linkedin from '../../img/linkedin.png'
 import github from '../../img/github.png'
 import gmail from '../../img/logo-Gmail-1-min.jpg'
-import profilePic from '../../img/profile pic.jpeg'
+import profilePic from '../../img/profile pic.jpg'
 
 const About = () => {
     return (

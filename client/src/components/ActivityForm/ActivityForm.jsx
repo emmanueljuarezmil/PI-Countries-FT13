@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCountriesForActivities } from '../../actions'
 import { Link } from "react-router-dom"
 import axios from 'axios'
-import { BACKENDURL } from '../../constants'
 
 const ActivityForm = () => {
     const [input, setInput] = useState({
@@ -64,7 +63,7 @@ const ActivityForm = () => {
             description: input.description !== '' ? input.description : null
         }
         try {
-            const { data } = await axios.post(`${BACKENDURL}/activity`, body)
+            const { data } = await axios.post(`${process.env.REACT_APP_BACKENDURL}/activity`, body)
             alert(data)
             setInput({
                 name: '',

@@ -2,7 +2,7 @@ import React from 'react'
 import './SearchFailed.css'
 import globe from '../../img/globe.png'
 
-function SearchFailed() {
+const SearchFailed = () => {
     return (
         <div>
             <h3>Tu busqueda no obtuvo resultados, intenta de otra forma</h3>

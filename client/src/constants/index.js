@@ -1,4 +1,3 @@
-export const BACKENDURL = 'http://localhost:3001'
 export const GET_COUNTRIES = 'GET_COUNTRIES'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const SET_SEARCHED_COUNTRIES = 'SET_SEARCHED_COUNTRIES'

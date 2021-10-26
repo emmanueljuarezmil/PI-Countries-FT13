@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { 
-    BACKENDURL,
     GET_COUNTRIES,
     SET_CURRENT_PAGE,
     SET_SEARCHED_COUNTRIES,
@@ -25,7 +24,7 @@ export const getCountries = (
   ) => {
   return async (dispatch) => {
     try {
-        const { data } = await axios.get(`${BACKENDURL}/countries?name=${name}&orderBy=${orderBy}&orderType=${orderType}&page=${page}&itemsPerPage=${itemsPerPage}&activityFilter=${activityFilter}&continentFilter=${continentFilter}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKENDURL}/countries?name=${name}&orderBy=${orderBy}&orderType=${orderType}&page=${page}&itemsPerPage=${itemsPerPage}&activityFilter=${activityFilter}&continentFilter=${continentFilter}`)
         dispatch({
           type: GET_COUNTRIES,
           payload: data
@@ -39,7 +38,7 @@ export const getCountries = (
 export const getCountriesForActivities = () => {
   return async (dispatch) => {
     try {
-        const { data } = await axios.get(`${BACKENDURL}/countriesForActivities`)
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKENDURL}/countriesForActivities`)
         dispatch({
           type: GET_COUNTRIES_FOR_ACTIVITIES,
           payload: data
@@ -53,7 +52,7 @@ export const getCountriesForActivities = () => {
 export const getActivities = () => {
   return async (dispatch) => {
     try {
-        const { data } = await axios.get(`${BACKENDURL}/activity`)
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKENDURL}/activity`)
         dispatch({
           type: GET_ACTIVITIES,
           payload: data
@@ -67,7 +66,7 @@ export const getActivities = () => {
 export const getActivitiesForSearchBar = () => {
   return async (dispatch) => {
     try {
-        const { data } = await axios.get(`${BACKENDURL}/activitySearchBar`)
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKENDURL}/activitySearchBar`)
         dispatch({
           type: GET_ACTIVITIES_FOR_SEARCH_BAR,
           payload: data
@@ -81,7 +80,7 @@ export const getActivitiesForSearchBar = () => {
 export const getCountryDetail = (id) => {
   return async (dispatch) => {
     try {
-        const { data } = await axios.get(`${BACKENDURL}/countries/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKENDURL}/countries/${id}`)
         dispatch({
           type: GET_COUNTRY_DETAIL,
           payload: {

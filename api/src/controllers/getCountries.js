@@ -1,6 +1,5 @@
 const { Country, Activity } = require('../db')
 const { Op } = require('sequelize')
-const { query } = require('express')
 
 const exclude = ['createdAt', 'updatedAt']
 
