@@ -1,44 +1,39 @@
 import './Nav.css'
 import React from 'react'
-import { NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logoHenry from '../../img/logoHenry.png'
 
 const Nav = () => {
     return (
-        <div className='nav'>
-            <div className='nav-img nav-item'>
-                <span>App realizada en: </span>
-                <a
-                href="https://www.soyhenry.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                >
-                    <img src={logoHenry} alt="" />
-                </a>
-            </div>
-            <div className='nav-links nav-item'>
+        <div className='nav-container'>
+            <div></div>
+            <div className='nav-links'>
                 <NavLink 
                 to="/home" 
                 activeClassName="nav-link-active" 
-                className='nav-link'>
+                className='nav-link link'>
                     HOME
                 </NavLink>
                 <NavLink 
                 to="/activities" 
                 activeClassName="nav-link-active" 
-                className='nav-link'>
+                className='nav-link link'>
                     ACTIVIDADES
                 </NavLink>
                 <NavLink 
                 to="/about" 
                 activeClassName="nav-link-active" 
-                className='nav-link'>
+                className='nav-link link'>
                     ABOUT
                 </NavLink>
             </div>
-            <span className='nav-text nav-item'>
-                Dark Mode
-            </span>
+            <a
+            href="https://www.soyhenry.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className='nav-img'>
+                <img src={logoHenry} alt="Logo SoyHenry" />
+            </a>
         </div>
     )
 }

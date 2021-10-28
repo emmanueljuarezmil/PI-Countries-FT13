@@ -28,8 +28,8 @@ const SearchBar = () => {
 
     const clearSearch = () => {
         dispatch(setSearch(''))
-        dispatch(setOrderBy('name'))
-        dispatch(setOrderType('ASC'))
+        dispatch(setOrderBy(''))
+        dispatch(setOrderType(''))
         dispatch(setActivityFilter(''))
         dispatch(setContinentFilter(''))
         dispatch(setCurrentPage(1))
@@ -39,6 +39,7 @@ const SearchBar = () => {
         <div>
             <input 
             type="text"
+            placeholder="Buscar..."
             value={currentSearch}
             onChange={e => {
                 dispatch(setSearch(e.target.value))
@@ -52,6 +53,7 @@ const SearchBar = () => {
                 dispatch(setOrderBy(e.target.value))
                 dispatch(setCurrentPage(1))}}
             >
+                <option value="">Ordenar por</option>
                 <option value="name">Nombres</option>
                 <option value="poblation">Población</option>
                 <option value="area">Superficie</option>
@@ -63,6 +65,7 @@ const SearchBar = () => {
                 dispatch(setOrderType(e.target.value))
                 dispatch(setCurrentPage(1))}}
             >
+                <option value="">Tipo de orden</option>
                 <option value="ASC">Ascendente</option>
                 <option value="DESC">Descendente</option>
             </select>
@@ -73,7 +76,7 @@ const SearchBar = () => {
                 dispatch(setContinentFilter(e.target.value))
                 dispatch(setCurrentPage(1))}}
             >
-                <option value="">Todos</option>
+                <option value="">Filtrar por pais</option>
                 {
                     continents && continents.map((continent, index) => 
                     <option 
@@ -92,7 +95,7 @@ const SearchBar = () => {
                 dispatch(setCurrentPage(1))}}
             value={activityFilter}
             >
-                <option value="">Ninguna</option>
+                <option value="">Filtrar por actividades</option>
                 {
                     activitiesForSearchBar && activitiesForSearchBar.map((activity, index) => 
                     <option 
@@ -104,7 +107,7 @@ const SearchBar = () => {
                 }
             </select>
             <button onClick={() => clearSearch()}>
-                Eliminar filtros y búsqueda
+                Limpiar filtros
             </button>
         </div>
     )

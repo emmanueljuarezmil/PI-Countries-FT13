@@ -14,13 +14,13 @@ const getCountries = async (req,res,next) => {
         continentFilter = ''
     } = req.query
 
-    name = name !== 'undefined' ? name : ''
-    orderBy = orderBy !== 'undefined' ? orderBy : 'name'
-    orderType = orderType !== 'undefined' ? orderType : 'ASC'
+    name = name !== 'undefined' && name !== '' ? name : ''
+    orderBy = orderBy !== 'undefined' && orderBy !== '' ? orderBy : 'name'
+    orderType = orderType !== 'undefined' && orderType !== '' ? orderType : 'ASC'
     page = page !== 'undefined' ? parseInt(page) : 1
     itemsPerPage = itemsPerPage !== 'undefined' ? parseInt(itemsPerPage) : 9
-    activityFilter = activityFilter !== 'undefined' ? activityFilter : ''
-    continentFilter = continentFilter !== 'undefined' ? continentFilter : ''
+    activityFilter = activityFilter !== 'undefined' && activityFilter !== '' ? activityFilter : ''
+    continentFilter = continentFilter !== 'undefined' && continentFilter !== '' ? continentFilter : ''
 
     if((orderBy !== 'name' && orderBy !== 'poblation' && orderBy !== 'area') || (orderType !== 'ASC' && orderType !== 'DESC')) {
         return next({

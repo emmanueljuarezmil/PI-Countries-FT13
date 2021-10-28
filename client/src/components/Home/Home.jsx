@@ -28,14 +28,18 @@ const Home = () => {
     }, [dispatch, searchedCountries, orderBy, orderType, page, itemsPerPage, activityFilter, continentFilter ])
 
     return (
-        <div>
-            <SearchBar/>
-            <CountryCardsContainer/>
-            <Paginater 
-            page={page}
-            totalPages={totalPages}
-            setPage={setPage}
-            />
+        <div className="home-container">
+            <div className="searchbar-container">
+                <SearchBar/>
+            </div>
+            <div className="countries-container">
+                <CountryCardsContainer/>
+                <Paginater 
+                page={page}
+                totalPages={totalPages}
+                setPage={setPage}
+                />
+            </div>
         </div>
     )
 }

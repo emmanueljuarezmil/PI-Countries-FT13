@@ -9,9 +9,9 @@ import sequelize from '../../img/sequelize.png'
 const Footer = () => {
     return (
         <div className='footer'>
-            <div className='footer-element footer-poweredby'>
+            <div className='footer-imgs'>
                 <span>
-                    MADE WITH:
+                    MADE WITH
                 </span>
                 <img src={express} className='footer-icon' alt="Logo Express.js"/>
                 <img src={postgres} className='footer-icon' alt="Logo PostgreSQL"/>

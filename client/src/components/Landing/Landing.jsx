@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Landing = () => {
     return (
-        <div>
-            <Link to="/home">Ingresar</Link>
+        <div className="landing-container">
+            <Link to="/home" className="landing-link link">INGRESAR</Link>
         </div>
     )
 }

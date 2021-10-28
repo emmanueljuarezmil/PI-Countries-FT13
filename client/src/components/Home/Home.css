@@ -1,0 +1,27 @@
+.home-container {
+    height: 84vh;
+    max-height: 84vh;
+    display: flex;
+}
+
+.searchbar-container {
+    width: 20vw;
+}
+
+.countries-container {
+    width: 80vw;
+}
+
+@media (orientation: portrait) {
+    .home-container {
+        flex-direction: column;
+    }
+    
+    .searchbar-container {
+        width: 100vw;
+    }
+    
+    .countries-container {
+        width: 100vw;
+    }
+}

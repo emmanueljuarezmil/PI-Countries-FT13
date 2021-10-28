@@ -1,13 +1,29 @@
+:root {
+  font-size: 3vmin;
+  font-family: Candara, Calibri, Segoe, Segoe UI, Optima, Arial, sans-serif;
+  --font-titles-links: Arial, Helvetica Neue, Helvetica, sans-serif;
+  --yellow: #F8FF00;
+  --lightblue: #4CA1E6;
+  --dullyellow: #E0E635;
+  --red: #E6241E;
+  --darkred: #99201C;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.tittle, .link, .button {
+  font-family: var(--font-titles-links);
+  text-decoration: none;
+  background-color: white;
+  color: #000;
+  opacity: .75;
+  font-weight: 600;
+}
+
+.link:hover {
+  opacity: 1;
 }
