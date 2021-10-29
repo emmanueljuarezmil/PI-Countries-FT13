@@ -2,11 +2,11 @@
   font-size: 3vmin;
   font-family: Candara, Calibri, Segoe, Segoe UI, Optima, Arial, sans-serif;
   --font-titles-links: Arial, Helvetica Neue, Helvetica, sans-serif;
-  --yellow: #F8FF00;
-  --lightblue: #4CA1E6;
-  --dullyellow: #E0E635;
-  --red: #E6241E;
-  --darkred: #99201C;
+  --yellow: #f8ff00;
+  --lightblue: #4ca1e6;
+  --dullyellow: #e0e635;
+  --red: #e6241e;
+  --darkred: #99201c;
 }
 
 body {
@@ -15,15 +15,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.tittle, .link, .button {
+.tittle,
+.link,
+.button {
   font-family: var(--font-titles-links);
   text-decoration: none;
   background-color: white;
   color: #000;
-  opacity: .75;
+  opacity: 0.75;
   font-weight: 600;
 }
 
-.link:hover {
+.link:hover,
+.button:hover {
   opacity: 1;
+  cursor: pointer;
 }

@@ -1,47 +1,62 @@
-import './Home.css'
-import React, { useEffect } from 'react'
-import CountryCardsContainer from '../CountryCardsContainer/CountryCardsContainer'
-import { getCountries, setCurrentPage } from '../../actions'
-import { useDispatch, useSelector } from 'react-redux'
-import SearchBar from '../SearchBar/SearchBar'
-import Paginater from '../Paginater/Paginater'
+import "./Home.css";
+import React, { useEffect } from "react";
+import CountryCardsContainer from "../CountryCardsContainer/CountryCardsContainer";
+import { getCountries, setCurrentPage } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "../SearchBar/SearchBar";
+import Paginater from "../Paginater/Paginater";
 
 const Home = () => {
-    const dispatch = useDispatch()
-    const itemsPerPage = 9
+  const dispatch = useDispatch();
+  const itemsPerPage = 9;
 
-    const page = useSelector(state => state.currentPage)
-    const searchedCountries = useSelector(state => state.searchedCountries)
-    const orderBy = useSelector(state => state.orderBy)
-    const orderType = useSelector(state => state.orderType)
-    const activityFilter = useSelector(state => state.activityFilter)
-    const continentFilter = useSelector(state => state.continentFilter)
-    const totalPages = useSelector(state => state.totalPages)
+  const page = useSelector((state) => state.currentPage);
+  const searchedCountries = useSelector((state) => state.searchedCountries);
+  const orderBy = useSelector((state) => state.orderBy);
+  const orderType = useSelector((state) => state.orderType);
+  const activityFilter = useSelector((state) => state.activityFilter);
+  const continentFilter = useSelector((state) => state.continentFilter);
+  const totalPages = useSelector((state) => state.totalPages);
 
-    const setPage = (e) => {
-        e.preventDefault()
-        dispatch(setCurrentPage(parseInt(e.target.value)))
-    }
+  const setPage = (e) => {
+    e.preventDefault();
+    dispatch(setCurrentPage(parseInt(e.target.value)));
+  };
 
-    useEffect(() => {
-        dispatch(getCountries( searchedCountries, orderBy, orderType, page, itemsPerPage, activityFilter, continentFilter ))
-    }, [dispatch, searchedCountries, orderBy, orderType, page, itemsPerPage, activityFilter, continentFilter ])
+  useEffect(() => {
+    dispatch(
+      getCountries(
+        searchedCountries,
+        orderBy,
+        orderType,
+        page,
+        itemsPerPage,
+        activityFilter,
+        continentFilter
+      )
+    );
+  }, [
+    dispatch,
+    searchedCountries,
+    orderBy,
+    orderType,
+    page,
+    itemsPerPage,
+    activityFilter,
+    continentFilter,
+  ]);
 
-    return (
-        <div className="home-container">
-            <div className="searchbar-container">
-                <SearchBar/>
-            </div>
-            <div className="countries-container">
-                <CountryCardsContainer/>
-                <Paginater 
-                page={page}
-                totalPages={totalPages}
-                setPage={setPage}
-                />
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="home-container">
+      <div className="searchbar-home-container home-item">
+        <SearchBar />
+      </div>
+      <div className="countries-home-container home-item">
+        <CountryCardsContainer />
+        <Paginater page={page} totalPages={totalPages} setPage={setPage} />
+      </div>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

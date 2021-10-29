@@ -1,52 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import './Activities.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
-import { getActivities } from '../../actions'
-import ActivityCard from '../ActivityCard/ActivityCard';
-import Paginater from '../Paginater/Paginater';
+import React, { useEffect, useState } from "react";
+import "./Activities.css";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getActivities } from "../../actions";
+import ActivityCard from "../ActivityCard/ActivityCard";
+import Paginater from "../Paginater/Paginater";
 
 const Activities = () => {
-    const dispatch = useDispatch()
-    
-    useEffect(() => {
-        dispatch(getActivities())
-    }, [dispatch])
+  const dispatch = useDispatch();
 
-    const activities = useSelector(state => state.activities)
+  useEffect(() => {
+    dispatch(getActivities());
+  }, [dispatch]);
 
-    const [page, setCurrentPage] = useState(1)
-    const activitiesPerPage = 9
-    const totalPages = Math.ceil(activities.length / activitiesPerPage)
-    const activitiesToRender = activities.slice((page - 1) * activitiesPerPage, page * activitiesPerPage)
+  const activities = useSelector((state) => state.activities);
 
-    const setPage = (e) => {
-        e.preventDefault()
-        setCurrentPage(parseInt(e.target.value))
-    }
+  const [page, setCurrentPage] = useState(1);
+  const activitiesPerPage = 9;
+  const totalPages = Math.ceil(activities.length / activitiesPerPage);
+  const activitiesToRender = activities.slice(
+    (page - 1) * activitiesPerPage,
+    page * activitiesPerPage
+  );
 
-    return (
-        <div>
-            <div>
-                {
-                    activitiesToRender && activitiesToRender.map(activity => 
-                    <ActivityCard 
-                    activity={activity} 
-                    key={activity.id}
-                    />)
-                }
-            </div>
-            <Paginater 
-            page={page}
-            totalPages={totalPages}
-            setPage={setPage}
-            />
-            <div>
-                <Link to="/newactivity">Crear actividad</Link>
-                <Link to="/home">Regresar al home</Link>
-            </div>
-        </div>
-    )
-}
+  const setPage = (e) => {
+    e.preventDefault();
+    setCurrentPage(parseInt(e.target.value));
+  };
 
-export default Activities
+  return (
+    <div>
+      <div>
+        {activitiesToRender &&
+          activitiesToRender.map((activity) => (
+            <ActivityCard activity={activity} key={activity.id} />
+          ))}
+      </div>
+      <Paginater page={page} totalPages={totalPages} setPage={setPage} />
+      <div>
+        <Link to="/newactivity">Crear actividad</Link>
+        <Link to="/home">Regresar al home</Link>
+      </div>
+    </div>
+  );
+};
+
+export default Activities;

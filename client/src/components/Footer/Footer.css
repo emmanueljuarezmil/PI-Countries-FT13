@@ -1,25 +1,25 @@
 .footer {
-    display: flex;
-    height: 8vh;
-    max-width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2vw;
-    background-color: var(--darkred);
-    color: #fff;
+  display: flex;
+  height: 8vh;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vw;
+  background-color: var(--darkred);
+  color: #fff;
 }
 
 .footer-imgs {
-    display: flex;
-    height: 100%;
-    align-items: center;
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 
 .footer-imgs img {
-    height: 70%;
-    padding: 0 2vmin;
+  height: 70%;
+  padding: 0 2vmin;
 }
 
 .footer-imgs span {
-    font-weight: 600;
+  font-weight: 600;
 }

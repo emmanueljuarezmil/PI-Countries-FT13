@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define('country', {
+  sequelize.define("country", {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -13,15 +13,15 @@ module.exports = (sequelize) => {
     },
     flag: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     continent: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     capital: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     subregion: {
       type: DataTypes.STRING,
@@ -33,10 +33,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     lat: {
-      type: DataTypes.DECIMAL
+      type: DataTypes.DECIMAL,
     },
     lng: {
-      type: DataTypes.DECIMAL
-    }
+      type: DataTypes.DECIMAL,
+    },
   });
 };

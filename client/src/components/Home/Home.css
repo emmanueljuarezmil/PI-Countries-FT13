@@ -1,27 +1,30 @@
 .home-container {
-    height: 84vh;
-    max-height: 84vh;
-    display: flex;
+  height: 84vh;
+  max-height: 84vh;
+  display: flex;
 }
 
-.searchbar-container {
-    width: 20vw;
+.searchbar-home-container {
+  width: 20vw;
+  height: min-content;
 }
 
-.countries-container {
-    width: 80vw;
+.countries-home-container {
+  width: 80vw;
+  height: 100%;
 }
 
 @media (orientation: portrait) {
-    .home-container {
-        flex-direction: column;
-    }
-    
-    .searchbar-container {
-        width: 100vw;
-    }
-    
-    .countries-container {
-        width: 100vw;
-    }
+  .home-container {
+    flex-direction: column;
+  }
+
+  .searchbar-home-container {
+    width: 100vw;
+    height: minmax(min-content, max-content);
+  }
+
+  .countries-home-container {
+    width: 100vw;
+  }
 }

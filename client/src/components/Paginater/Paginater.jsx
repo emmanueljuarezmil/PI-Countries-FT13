@@ -1,46 +1,29 @@
-import './Paginater.css'
-import React from 'react'
+import "./Paginater.css";
+import React from "react";
 
-const Paginater = ({page, totalPages, setPage}) => {
+const Paginater = ({ page, totalPages, setPage }) => {
+  return (
+    <div className="paginater-container">
+      <button value={1} onClick={setPage} disabled={page === 1}>
+        {"|<"}
+      </button>
+      <button value={page - 1} onClick={setPage} disabled={page === 1}>
+        {"<<"}
+      </button>
+      <span>{page}</span>
+      <button value={page + 1} onClick={setPage} disabled={page === totalPages}>
+        {">>"}
+      </button>
+      <button
+        value={totalPages}
+        onClick={setPage}
+        disabled={page === totalPages}
+      >
+        {">|"}
+      </button>
+      <span>de {totalPages}</span>
+    </div>
+  );
+};
 
-    return (
-        <div>
-            <button 
-            value={1} 
-            onClick={setPage} 
-            disabled={ page === 1 }
-            >
-                {"|<"}
-            </button>
-            <button 
-            value={page - 1} 
-            onClick={setPage} 
-            disabled={ page === 1 }
-            >
-                {"<<"}
-            </button>
-            <span>
-                {page}
-            </span>
-            <button 
-            value={page + 1} 
-            onClick={setPage} 
-            disabled={ page === totalPages }
-            >
-                {">>"}
-            </button>
-            <button 
-            value={totalPages} 
-            onClick={setPage} 
-            disabled={ page === totalPages }
-            >
-                {">|"}
-            </button>
-            <span>
-                de {totalPages}
-            </span>
-        </div>
-    )
-}
-
-export default Paginater
+export default Paginater;
