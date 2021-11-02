@@ -2,6 +2,7 @@
   height: 84vh;
   max-height: 84vh;
   display: flex;
+  background-color: var(--homebackground);
 }
 
 .searchbar-home-container {
@@ -17,14 +18,17 @@
 @media (orientation: portrait) {
   .home-container {
     flex-direction: column;
+    height: min-content;
+    overflow-y: scroll;
+    width: 100vw;
   }
 
   .searchbar-home-container {
-    width: 100vw;
+    width: 100%;
     height: minmax(min-content, max-content);
   }
 
   .countries-home-container {
-    width: 100vw;
+    width: 100%;
   }
 }

@@ -85,7 +85,7 @@ const SearchBar = () => {
           dispatch(setCurrentPage(1));
         }}
       >
-        <option value="">Filtrar por pais</option>
+        <option value="">Filtrar por continente</option>
         {continents &&
           continents.map((continent, index) => (
             <option value={continent} key={index}>

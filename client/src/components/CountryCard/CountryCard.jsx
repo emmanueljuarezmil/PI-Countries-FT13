@@ -8,17 +8,18 @@ const CountryCard = ({ country }) => {
   const { name, id, flag } = country;
   const dispatch = useDispatch();
   return (
-    <Link onClick={() => dispatch(getCountryDetail(id))} to="/countryDetail">
-      <div
-        style={{
-          backgroundImage: `url(${flag})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+    <div
+      style={{
+        backgroundImage: `url(${flag})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="country-card-container"
+    >
+      <Link onClick={() => dispatch(getCountryDetail(id))} to="/countryDetail" className="button">
         <span>{name}</span>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
