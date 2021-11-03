@@ -1,0 +1,94 @@
+.activityform-container {
+  width: 100%;
+  height: 84vh;
+  background-color: var(--homebackground);
+  display: flex;
+  flex-direction: column;
+}
+
+.activityform-form {
+  width: 90%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: auto;
+  padding: 2vmin;
+}
+
+.activityform-form-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.activityform-form-input {
+  width: 50vw;
+}
+
+input,
+select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.activityform-form-input-countries {
+  display: flex;
+  justify-content: space-between;
+}
+
+.activityform-form-input-countries > select {
+  width: 85%;
+}
+
+.button-disabled {
+  opacity: .5;
+}
+
+.button-disabled:hover {
+  opacity: .5;
+  cursor: auto;
+}
+
+.activityform-errorsubmit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activityform-errorsubmit > span {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.activityform-countries {
+  height: 25vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.activityform-countries > p {
+  text-align: left;
+}
+
+.activityform-countries > ul {
+  min-height: 22vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.activityform-countries > ul > li {
+  list-style-type: none;
+  text-align: left;
+}
+
+@media screen and (max-aspect-ratio: 13/9) {
+  .activityform-error {
+    font-size: .9rem;
+  }
+}

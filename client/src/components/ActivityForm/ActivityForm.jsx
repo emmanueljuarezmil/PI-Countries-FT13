@@ -127,13 +127,19 @@ const ActivityForm = () => {
   };
 
   return (
-    <div>
-      <div className="activityform-form">
-        <form
-          onSubmit={(e) => {
-            submitForm(e);
-          }}
-        >
+    <div className="activityform-container">
+      <div className="activities-link">
+        <Link to="/activities" className="link">
+          Regresar a actividades
+        </Link>
+      </div>
+      <form
+        onSubmit={(e) => {
+          submitForm(e);
+        }}
+        className="activityform-form"
+      >
+        <div className="activityform-inputs-container">
           <div className="activityform-form-item">
             <span>Nombre*</span>
             <input
@@ -141,6 +147,7 @@ const ActivityForm = () => {
               name="name"
               value={input.name}
               onChange={handleChange}
+              className="activityform-form-input"
             />
           </div>
           <div className="activityform-form-item">
@@ -151,7 +158,33 @@ const ActivityForm = () => {
               value={input.duration}
               onChange={handleChange}
               min="0"
+              className="activityform-form-input"
             />
+          </div>
+          <div className="activityform-form-item">
+            <span>Descripción</span>
+            <input
+              type="text"
+              name="description"
+              value={input.description}
+              onChange={handleChange}
+              className="activityform-form-input"
+            />
+          </div>
+          <div className="activityform-form-item">
+            <span>Temporada</span>
+            <select
+              name="season"
+              value={input.season}
+              onChange={handleChange}
+              className="activityform-form-input"
+            >
+              <option value="">Cualquiera</option>
+              <option value="Verano">Verano</option>
+              <option value="Otoño">Otoño</option>
+              <option value="Invierno">Invierno</option>
+              <option value="Primavera">Primavera</option>
+            </select>
           </div>
           <div className="activityform-form-item">
             <span>Dificultad*</span>
@@ -159,6 +192,7 @@ const ActivityForm = () => {
               name="difficult"
               value={input.difficult}
               onChange={handleChange}
+              className="activityform-form-input"
             >
               <option></option>
               <option value="1">Muy fácil</option>
@@ -169,76 +203,58 @@ const ActivityForm = () => {
             </select>
           </div>
           <div className="activityform-form-item">
-            <span>Temporada</span>
-            <select name="season" value={input.season} onChange={handleChange}>
-              <option value="">Cualquiera</option>
-              <option value="Verano">Verano</option>
-              <option value="Otoño">Otoño</option>
-              <option value="Invierno">Invierno</option>
-              <option value="Primavera">Primavera</option>
-            </select>
-          </div>
-          <div className="activityform-form-item">
-            <span>Descripción</span>
-            <input
-              type="text"
-              name="description"
-              value={input.description}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="activityform-form-item">
             <span>Paises*</span>
-            <select
-              name="countryId"
-              value={input.countryId.id}
-              onChange={handleChange}
-            >
-              <option value=""></option>
-              {countriesForActivities &&
-                countriesForActivities.map((country) => (
-                  <option value={country.id} key={country.id}>
-                    {country.name}
-                  </option>
-                ))}
-            </select>
-            <button onClick={(e) => addCountry(e)}>Añadir pais</button>
+            <div className="activityform-form-input activityform-form-input-countries">
+              <select
+                name="countryId"
+                value={input.countryId.id}
+                onChange={handleChange}
+              >
+                <option value=""></option>
+                {countriesForActivities &&
+                  countriesForActivities.map((country) => (
+                    <option value={country.id} key={country.id}>
+                      {country.name}
+                    </option>
+                  ))}
+              </select>
+              <button onClick={(e) => addCountry(e)} className="button">Añadir</button>
+            </div>
           </div>
-          <div className="activityform-countries">
-            <p>Paises añadidos</p>
+        </div>
+        <div className="activityform-countries">
+          <p>Paises añadidos</p>
+          <ul>
             {input.countriesIds.map((country) => (
-              <span className="activityform-countries-item" key={country.id}>
-                {`${country.name} `}
+              <li className="activityform-countries-item" key={country.id}>
                 <button
                   className="activityform-countries-item-delete"
                   onClick={(e) => {
                     e.preventDefault();
                     deleteCountry(country.id);
                   }}
-                >
-                  Quitar
+                  >
+                  X
                 </button>
-              </span>
+                <span>
+                  {`${country.name} `}
+                </span>
+              </li>
             ))}
-          </div>
-          <div className="activityform-submit">
-            {error.length !== 0 ? (
-              <span className="activityform-error">{error}</span>
-            ) : (
-              <input
-                className="activityform-submit-button"
-                type="submit"
-                value="Enviar actividad"
-                onClick={(e) => submitForm(e)}
-              />
-            )}
-          </div>
-        </form>
-      </div>
-      <div>
-        <Link to="/home">Regresar al home</Link>
-        <Link to="/activities">Regresar a actividades</Link>
-      </div>
+
+          </ul>
+        </div>
+        <div className="activityform-errorsubmit">
+            <span className="activityform-error">{error || ' '}</span>
+            <input
+              className={`button ${error.length !== 0 ? 'button-disabled' : ''}`}
+              type="submit"
+              value="Enviar actividad"
+              onClick={(e) => submitForm(e)}
+              disabled={error.length !== 0}
+            />
+        </div>
+      </form>
     </div>
   );
 };

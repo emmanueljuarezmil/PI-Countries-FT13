@@ -4,6 +4,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 4vmin;
+  font-size: 1em;
+  height: 100%;
+  margin: auto;
 }
 
 .country-card-container:hover {

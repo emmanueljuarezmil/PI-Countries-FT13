@@ -13,9 +13,12 @@
 .countries-home-container {
   width: 80vw;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-@media (orientation: portrait) {
+@media screen and (max-aspect-ratio: 13/9) {
   .home-container {
     flex-direction: column;
     height: min-content;

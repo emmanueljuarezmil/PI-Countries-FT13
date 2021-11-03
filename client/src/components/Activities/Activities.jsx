@@ -16,7 +16,7 @@ const Activities = () => {
   const activities = useSelector((state) => state.activities);
 
   const [page, setCurrentPage] = useState(1);
-  const activitiesPerPage = 9;
+  const activitiesPerPage = 2;
   const totalPages = Math.ceil(activities.length / activitiesPerPage);
   const activitiesToRender = activities.slice(
     (page - 1) * activitiesPerPage,
@@ -29,17 +29,18 @@ const Activities = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="activities-container">
+      <div className="activities-link">
+        <Link to="/newactivity" className="link">Crear actividad</Link>
+      </div>
+      <div className="activities-cards-container">
         {activitiesToRender &&
           activitiesToRender.map((activity) => (
             <ActivityCard activity={activity} key={activity.id} />
           ))}
       </div>
-      <Paginater page={page} totalPages={totalPages} setPage={setPage} />
-      <div>
-        <Link to="/newactivity">Crear actividad</Link>
-        <Link to="/home">Regresar al home</Link>
+      <div className="activities-paginater-container">
+        <Paginater page={page} totalPages={totalPages} setPage={setPage} />
       </div>
     </div>
   );

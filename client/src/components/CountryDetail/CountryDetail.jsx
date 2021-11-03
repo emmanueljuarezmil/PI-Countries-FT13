@@ -1,7 +1,6 @@
 import "./CountryDetail.css";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import ActivityCard from "../ActivityCard/ActivityCard";
 import CountryCard from "../CountryCard/CountryCard";
 import Carousel from "../Carousel/Carousel";
@@ -44,29 +43,30 @@ const CountryDetail = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
+      className="countrydetail-container"
     >
-      <h2>{name}</h2>
-      <div>
-        <div>
+      <div className="countrydetail-data-container">
+        <div className="countrydetail-data-columns-container">
+          <span>{name}</span>
           <span>Capital: {capital}</span>
           <span>Poblacion: {roundAndFix(poblation, "habitantes")}</span>
           <span>Superficie: {roundAndFix(area, "kilómetros cuadrados")}</span>
         </div>
-        <div>
+        <div className="countrydetail-data-columns-container">
           <span>Continente: {continent}</span>
           <span>Subregion: {subregion}</span>
           <span>
             Coordenadas: {lat}, {lng}
           </span>
+          <a
+            href={`https://www.google.com.ar/maps/@${lat},${lng},6z`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver en Google Maps
+          </a>
         </div>
       </div>
-      <a
-        href={`https://www.google.com.ar/maps/@${lat},${lng},6z`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Ver en Google Maps
-      </a>
       <div>
         <Carousel items={carouselActivityItems} n={2} />
       </div>
@@ -74,7 +74,6 @@ const CountryDetail = () => {
         <h3>Paises cercanos a {name} que pueden interesarte:</h3>
         <Carousel items={carouselNearbyCountriesItems} n={2} />
       </div>
-      <Link to="/home">Regresar al home</Link>
     </div>
   );
 };

@@ -1,3 +1,30 @@
 .paginater-container {
   margin: 1vh 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginater-button {
+  border-radius: 1.5rem;
+  opacity: .8;
+  margin: 0 .5vmax;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.paginater-button:hover {
+  cursor: pointer;
+  opacity: 1;
+  font-weight: 900;
+}
+
+@media screen and (max-aspect-ratio: 13/9) {
+  .paginater-button {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 1.5vmax;
+  }
 }

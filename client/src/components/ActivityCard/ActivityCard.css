@@ -1,0 +1,44 @@
+.activitycard-container {
+  padding: 1vmin;
+  margin: 1vmin;
+  background-color: var(--lightblue);
+  border-radius: 5vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100%;
+}
+
+.activitycard-container p {
+  text-align: left;
+}
+
+.activitycard-carousel-container {
+  height: 24vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+
+.activitycard-description {
+  height: 20vh;
+  overflow-y: auto
+}
+
+.activitycard-carousel-carousel {
+  height: 80%;
+}
+
+.countrycard-carouselactivity {
+  width: 45%;
+}
+
+@media screen and (max-aspect-ratio: 13/9) {
+  .activitycard-carousel-container {
+    height: 15vh;
+  }
+  .activitycard-container {
+    height: 50vh;
+  }
+}

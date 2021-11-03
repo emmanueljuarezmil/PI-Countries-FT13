@@ -1,0 +1,21 @@
+.countrydetail-container {
+  width: 100vw;
+  height: 84vh;
+}
+
+.countrydetail-data-container {
+  display: flex;
+  width: 95%;
+  margin: auto;
+  border: solid red 2px;
+}
+
+.countrydetail-data-columns-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.countrydetail-data-columns-container > span, .countrydetail-data-columns-container > a {
+  text-align: left;
+}

@@ -1,7 +1,7 @@
 .countrycards-container {
   margin: 1vh 1vw;
   display: grid;
-  height: 75vh;
+  height: 74vh;
   max-width: 100%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -9,7 +9,7 @@
   justify-items: center;
 }
 
-@media (orientation: portrait) {
+@media screen and (max-aspect-ratio: 13/9) {
   .countrycards-container {
     height: 240vh;
     grid-gap: 4vh;

@@ -23,10 +23,15 @@ body {
   text-decoration: none;
   background-color: white;
   color: #000;
-  opacity: 0.8;
   font-weight: 600;
   padding: .3rem;
   border-radius: .4rem;
+}
+
+.link, .button {
+  opacity: 0.8;
+  text-decoration: none;
+  border: none;
 }
 
 .link:hover,

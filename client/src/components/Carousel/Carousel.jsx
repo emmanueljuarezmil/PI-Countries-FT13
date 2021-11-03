@@ -20,22 +20,20 @@ const Carousel = ({ items, n }) => {
   };
 
   return (
-    <div>
-      {itemsToShow.length ? (
-        <div>
-          <div>
-            <button onClick={previous}>{"<"}</button>
+      itemsToShow.length ? (
+        <div className="carousel-container">
+          <div className="carousel-button-item">
+            <button onClick={previous} className="button">{"<"}</button>
           </div>
-          <div>
-            <div>{itemsToShow}</div>
-            <div>{`${slide} de ${totalSlides}`}</div>
+          <div className="carousel-items-container">
+            <div className="carousel-items-items">{itemsToShow}</div>
+            <div className="carousel-items-pages">{`${slide} de ${totalSlides}`}</div>
           </div>
-          <div>
-            <button onClick={next}>{">"}</button>
+          <div className="carousel-button-item">
+            <button onClick={next} className="button">{">"}</button>
           </div>
         </div>
-      ) : null}
-    </div>
+      ) : null
   );
 };
 
