@@ -17,7 +17,7 @@ function App() {
         exact path="/" 
         component={Landing} 
         />
-        <>
+        <Route>
           <Route
           path='/' 
           component={Nav}
@@ -46,7 +46,7 @@ function App() {
           path='/' 
           component={Footer}
           />
-        </>
+        </Route>
       </Switch>
     </div>
   );

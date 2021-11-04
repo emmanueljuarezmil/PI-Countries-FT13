@@ -16,8 +16,8 @@ const ActivityCard = ({ activity, mini }) => {
 
   const carouselCountriesItems = !mini
     ? countries.map((country) => (
-        <div className="countrycard-carouselactivity">
-          <CountryCard country={country} key={country.id} />
+        <div className="countrycard-carouselactivity" key={country.id}>
+          <CountryCard country={country} />
         </div>
       ))
     : null;
