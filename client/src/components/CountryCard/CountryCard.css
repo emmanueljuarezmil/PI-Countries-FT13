@@ -10,6 +10,19 @@
 }
 
 .country-card-container:hover {
-  /* outline: solid 1vmin #000; */
   transform: scale(1.03);
+}
+
+.country-card-container-mini {
+  width: 45%;
+  border-radius: 2vmin;
+}
+
+@media screen and (max-aspect-ratio: 13/9) {
+  .country-card-name {
+    font-size: 1.2rem;
+  }
+  .country-card-container-mini {
+    height: 80%;
+  }
 }

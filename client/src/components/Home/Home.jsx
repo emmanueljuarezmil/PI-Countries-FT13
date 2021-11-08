@@ -1,5 +1,5 @@
 import "./Home.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import CountryCardsContainer from "../CountryCardsContainer/CountryCardsContainer";
 import { getCountries, setCurrentPage } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,8 @@ import Paginater from "../Paginater/Paginater";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const scrollRef = useRef(null);
   const itemsPerPage = 9;
-
   const page = useSelector((state) => state.currentPage);
   const searchedCountries = useSelector((state) => state.searchedCountries);
   const orderBy = useSelector((state) => state.orderBy);
@@ -21,6 +21,7 @@ const Home = () => {
   const setPage = (e) => {
     e.preventDefault();
     dispatch(setCurrentPage(parseInt(e.target.value)));
+    scrollRef.current.scrollTop = 0;
   };
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const Home = () => {
       <div className="searchbar-home-container home-item">
         <SearchBar />
       </div>
-      <div className="countries-home-container home-item">
+      <div className="countries-home-container home-item" ref={scrollRef}>
         <CountryCardsContainer />
         <Paginater page={page} totalPages={totalPages} setPage={setPage} />
       </div>

@@ -22,7 +22,6 @@
   .home-container {
     flex-direction: column;
     height: min-content;
-    overflow-y: scroll;
     width: 100vw;
   }
 
@@ -33,5 +32,11 @@
 
   .countries-home-container {
     width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll;
+  }
+  .countries-home-container::-webkit-scrollbar {
+    display: none;
   }
 }

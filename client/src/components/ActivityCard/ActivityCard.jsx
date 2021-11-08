@@ -23,12 +23,28 @@ const ActivityCard = ({ activity, mini }) => {
     : null;
 
   return (
-    <div className="activitycard-container">
+    <div className={`activitycard-container ${mini ? 'activitycard-container-mini' : null}`}>
+      {!mini ? 
       <h3>{name}</h3>
-      <p>
-        Dificultad: {difficults[difficult - 1]}.{" "}
-        {duration ? `Duración aproximada: ${duration} minutos` : null}
+      : <span className="activitycard-tittle-mini">
+        {/* {name.length > 18 ?
+        `${name.slice(0, 18)}...` :
+        name
+        } */}
+        {name}
+      </span>
+    }
+      {
+        !mini ?
+        <p className="activitycard-difficult-duration">
+          Dificultad: {difficults[difficult - 1]}.{" "}
+          {duration ? `Duración: ${duration} minutos` : null}
+        </p> :
+        <p className="activitycard-difficult-duration">
+        {difficults[difficult - 1]}.{" "}
+        {duration ? `${duration} minutos` : null}
       </p>
+      }
       {!mini ? <p className="activitycard-description">{description}</p> : null}
       {!mini ? (
         <div className="activitycard-carousel-container">

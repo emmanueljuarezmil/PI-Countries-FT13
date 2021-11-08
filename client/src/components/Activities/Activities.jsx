@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Activities.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import Paginater from "../Paginater/Paginater";
 
 const Activities = () => {
   const dispatch = useDispatch();
+  const scrollRef = useRef(null)
 
   useEffect(() => {
     dispatch(getActivities());
@@ -26,10 +27,11 @@ const Activities = () => {
   const setPage = (e) => {
     e.preventDefault();
     setCurrentPage(parseInt(e.target.value));
+    scrollRef.current.scrollTop = 0;
   };
 
   return (
-    <div className="activities-container">
+    <div className="activities-container" ref={scrollRef}>
       <div className="activities-link">
         <Link to="/newactivity" className="link">Crear actividad</Link>
       </div>

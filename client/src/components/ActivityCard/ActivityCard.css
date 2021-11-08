@@ -34,11 +34,30 @@
   width: 45%;
 }
 
+.activitycard-container-mini {
+  border-radius: 2vmin;
+}
+
+.activitycard-tittle-mini {
+  font-size: .7rem;
+}
+
+.activitycard-container-mini {
+  width: 50%;
+}
+
 @media screen and (max-aspect-ratio: 13/9) {
   .activitycard-carousel-container {
     height: 15vh;
   }
   .activitycard-container {
     height: 50vh;
+  }
+  .activitycard-tittle-mini {
+    font-size: 1rem;
+  }
+  .activitycard-container-mini {
+    height: 70%;
+    font-size: .9rem;
   }
 }

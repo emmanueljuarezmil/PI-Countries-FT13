@@ -27,8 +27,13 @@
 
 @media screen and (max-aspect-ratio: 13/9) {
   .activities-container {
-    height: min-content;
-    max-height: min-content;
+    height: 84vh;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: scroll;
+  }
+  .activities-container::-webkit-scrollbar {
+    display: none;
   }
   .activities-cards-container {
     grid-template-columns: 1fr;
