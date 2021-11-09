@@ -1,9 +1,10 @@
 const { Country } = require("../db");
 const axios = require("axios");
+require('dotenv').config();
 
 const getAllCountriesFromApi = async () => {
   try {
-    const { data } = await axios.get("https://restcountries.com/v3/all");
+    const { data } = await axios.get(process.env.EXTERNAL_API_URL);
     for (let country of data) {
       await Country.create({
         id: country.cca3,
