@@ -47,7 +47,7 @@ const CountryDetail = () => {
           <span>Continente {continent}</span>
           <span>Subregion {subregion}</span>
           <span>
-            Coordenadas {lat}, {lng}
+            Coordenadas {parseFloat(lat).toFixed(2)}, {parseFloat(lng).toFixed(2)}
           </span>
           <a
             href={`https://www.google.com.ar/maps/@${lat},${lng},6z`}
