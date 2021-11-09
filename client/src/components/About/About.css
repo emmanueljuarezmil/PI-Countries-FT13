@@ -50,6 +50,8 @@
   .about-container {
     flex-direction: column;
     justify-content: space-evenly;
+    max-height: 84vh;
+    overflow-y: auto;
   }
   .about-description, .about-contact {
     max-width: 100%;
