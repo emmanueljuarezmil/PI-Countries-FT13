@@ -54,7 +54,9 @@ const Home = () => {
       </div>
       <div className="countries-home-container home-item" ref={scrollRef}>
         <CountryCardsContainer />
-        <Paginater page={page} totalPages={totalPages} setPage={setPage} />
+        {totalPages > 1 && (
+          <Paginater page={page} totalPages={totalPages} setPage={setPage} />
+        )}
       </div>
     </div>
   );

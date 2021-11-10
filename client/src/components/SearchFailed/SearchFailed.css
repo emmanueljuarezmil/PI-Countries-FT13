@@ -1,0 +1,8 @@
+.searchfailed-container {
+  height: 84vh;
+  width: 100%;
+}
+
+.searchfailed-container > img {
+  width: 35%;
+}

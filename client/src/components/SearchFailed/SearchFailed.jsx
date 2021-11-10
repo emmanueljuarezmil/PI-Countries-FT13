@@ -4,7 +4,7 @@ import globe from "../../img/globe.png";
 
 const SearchFailed = () => {
   return (
-    <div>
+    <div className="searchfailed-container">
       <h3>Tu busqueda no obtuvo resultados, intenta de otra forma</h3>
       <img src={globe} alt="Imagen de globo terraqueo" />
     </div>
