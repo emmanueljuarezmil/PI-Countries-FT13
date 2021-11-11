@@ -9,8 +9,8 @@ const About = () => {
     <div className="about-container">
       <div className="about-description">
         <p>
-          Countries es una Aplicación Web Full Stack de un proyecto individual,
-          realizado durante mi bootcamp en{" "}
+          AppCountriesFull es una Aplicación Web Full Stack de un proyecto
+          individual, realizado durante mi bootcamp en{" "}
           <a
             href="https://www.soyhenry.com"
             target="_blank"
@@ -36,19 +36,18 @@ const About = () => {
           requerirlos desde la API propia.
         </p>
         <h3>Sobre mi</h3>
-          <p>
-            Desarrollador Web Full Stack, con background en ciencias económicas.
-          </p>
-          <p>
-            Me encanta el back-end, aunque me siento cómodo en el front-end y
-            como full stack. Apasionado desde temprana edad por "las
-            computadoras", luego estudiante de contabilidad, para al fin entrar
-            y dedicarme al 100% en el hermoso mundo IT, que lo siento mi lugar.
-            Disfruto mucho crear soluciones, siempre con predisposición a
-            buscar, aprender y aplicar nuevas tecnologías y herramientas, y
-            colaborar en equipo.
-          </p>
-          <p>Me encanta la música y viajar.</p>
+        <p>
+          Desarrollador Web Full Stack, con background en ciencias económicas.
+        </p>
+        <p>
+          Me encanta el back-end, aunque me siento cómodo en el front-end y como
+          full stack. Apasionado desde temprana edad por "las computadoras",
+          luego estudiante de contabilidad, para al fin entrar y dedicarme al
+          100% en el hermoso mundo IT, que lo siento mi lugar. Disfruto mucho
+          crear soluciones, siempre con predisposición a buscar, aprender y
+          aplicar nuevas tecnologías y herramientas, y colaborar en equipo.
+        </p>
+        <p>Me encanta la música y viajar.</p>
       </div>
       <div className="about-contact">
         <h3>Contacto</h3>
