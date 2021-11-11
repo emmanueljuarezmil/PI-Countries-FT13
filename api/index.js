@@ -21,12 +21,12 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const { FORCE, PORT } = process.env
 const force = JSON.parse(FORCE)
-const { getAllCountriesFromApi, chargeInitialActivities } = require('./src/controllers')
+// const { getAllCountriesFromApi, chargeInitialActivities } = require('./src/controllers')
 
 // Syncing all the models at once.
 conn.sync({ force })
-.then(() => force ? getAllCountriesFromApi() : null)
-.then(() => force ? chargeInitialActivities() : null)
+// .then(() => force ? getAllCountriesFromApi() : null)
+// .then(() => force ? chargeInitialActivities() : null)
 .then(() => {
   server.listen(PORT, () => {
     console.log(`Server listening at port ${PORT}`); // eslint-disable-line no-console

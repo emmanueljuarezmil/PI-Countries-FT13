@@ -2,7 +2,7 @@ const { Country, Activity } = require("../db");
 const { v4: uuidv4 } = require("uuid");
 const activities = require("../../data/activities.json");
 
-const chargeInitialActivities = async () => {
+const chargeInitialActivities = async (req, res, next) => {
   try {
     const countries = await Country.findAll();
     for (let activity of activities) {
@@ -31,7 +31,7 @@ const chargeInitialActivities = async () => {
       const countriesToAddRemovedDuplicated = [...new Set(countriesToAdd)];
       await activityCreated.setCountries(countriesToAddRemovedDuplicated);
     }
-    console.log("Actividades precargadas en la base de datos");
+    return res.send("Actividades precargadas en la base de datos");
   } catch (err) {
     console.error(err);
   }
