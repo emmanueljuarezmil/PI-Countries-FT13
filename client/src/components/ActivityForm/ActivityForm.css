@@ -87,7 +87,14 @@ select {
   text-align: left;
 }
 
+.activityform-countries-item-delete {
+  cursor: pointer;
+}
+
 @media screen and (max-aspect-ratio: 13/9) {
+  .activityform-container {
+    overflow: hidden;
+  }
   .activityform-error {
     font-size: .9rem;
   }

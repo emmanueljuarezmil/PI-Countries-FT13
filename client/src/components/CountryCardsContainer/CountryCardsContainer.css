@@ -11,7 +11,7 @@
 
 @media screen and (max-aspect-ratio: 13/9) {
   .countrycards-container {
-    height: 240vh;
+    min-height: 240vh;
     gap: 4vh;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(9, 1fr);

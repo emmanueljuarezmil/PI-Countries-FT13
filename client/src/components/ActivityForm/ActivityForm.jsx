@@ -239,7 +239,7 @@ const ActivityForm = () => {
                   X
                 </button>
                 <span>
-                  {`${country.name} `}
+                  {` ${country.name} `}
                 </span>
               </li>
             ))}
