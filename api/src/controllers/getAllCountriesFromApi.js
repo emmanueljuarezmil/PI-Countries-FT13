@@ -2,7 +2,7 @@ const { Country } = require("../db");
 const axios = require("axios");
 require('dotenv').config();
 
-const getAllCountriesFromApi = async (req, res, next) => {
+const getAllCountriesFromApi = async () => {
   try {
     const { data } = await axios.get(process.env.EXTERNAL_API_URL);
     for (let country of data) {
@@ -19,7 +19,7 @@ const getAllCountriesFromApi = async (req, res, next) => {
         lng: country.latlng[1],
       });
     }
-    return res.send("Paises precargados en la base de datos");
+    console.log("Paises precargados en la base de datos");
   } catch (err) {
     console.error(err);
   }
