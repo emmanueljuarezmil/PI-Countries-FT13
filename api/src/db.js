@@ -2,15 +2,40 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME, DB_DIALECT } = process.env;
+const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME, DB_DIALECT, NODE_ENV } =
+  process.env;
 
-const sequelize = new Sequelize(
-  `${DB_DIALECT}://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-  {
-    logging: false, // set to console.log to see the raw SQL queries
-    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  }
-);
+const sequelize =
+  NODE_ENV === "production"
+    ? new Sequelize({
+        database: DB_NAME,
+        dialect: DB_DIALECT,
+        host: DB_HOST,
+        port: 5432,
+        username: DB_USER,
+        password: DB_PASSWORD,
+        pool: {
+          max: 3,
+          min: 1,
+          idle: 10000,
+        },
+        dialectOptions: {
+          ssl: {
+            require: true,
+            // Ref.: https://github.com/brianc/node-postgres/issues/2009
+            rejectUnauthorized: false,
+          },
+          keepAlive: true,
+        },
+        ssl: true,
+      })
+    : new Sequelize(
+        `${DB_DIALECT}://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        {
+          logging: false, // set to console.log to see the raw SQL queries
+          native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+        }
+      );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];

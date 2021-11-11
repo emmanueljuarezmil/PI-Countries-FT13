@@ -5,8 +5,6 @@ import { getCountriesForActivities } from "../../actions";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const backendDeployURL = window.location.host + '/countriesbackend'
-
 const ActivityForm = () => {
   const [input, setInput] = useState({
     name: "",
@@ -71,7 +69,7 @@ const ActivityForm = () => {
     };
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BACKENDURL || backendDeployURL}/activity`,
+        `/activity`,
         body
       );
       alert(data);

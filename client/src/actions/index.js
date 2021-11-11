@@ -13,8 +13,6 @@ import {
   GET_COUNTRIES_FOR_ACTIVITIES,
 } from "../constants";
 
-const backendDeployURL = window.location.host + '/countriesbackend'
-
 export const getCountries = (
   name,
   orderBy,
@@ -27,7 +25,7 @@ export const getCountries = (
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKENDURL || backendDeployURL}/countries?name=${name}&orderBy=${orderBy}&orderType=${orderType}&page=${page}&itemsPerPage=${itemsPerPage}&activityFilter=${activityFilter}&continentFilter=${continentFilter}`
+        `/countries?name=${name}&orderBy=${orderBy}&orderType=${orderType}&page=${page}&itemsPerPage=${itemsPerPage}&activityFilter=${activityFilter}&continentFilter=${continentFilter}`
       );
       dispatch({
         type: GET_COUNTRIES,
@@ -43,7 +41,7 @@ export const getCountriesForActivities = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKENDURL || backendDeployURL}/countriesForActivities`
+        `/countriesForActivities`
       );
       dispatch({
         type: GET_COUNTRIES_FOR_ACTIVITIES,
@@ -59,7 +57,7 @@ export const getActivities = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKENDURL || backendDeployURL}/activity`
+        `/activity`
       );
       dispatch({
         type: GET_ACTIVITIES,
@@ -75,7 +73,7 @@ export const getActivitiesForSearchBar = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKENDURL || backendDeployURL}/activitySearchBar`
+        `/activitySearchBar`
       );
       dispatch({
         type: GET_ACTIVITIES_FOR_SEARCH_BAR,
@@ -91,7 +89,7 @@ export const getCountryDetail = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BACKENDURL || backendDeployURL}/countries/${id}`
+        `/countries/${id}`
       );
       dispatch({
         type: GET_COUNTRY_DETAIL,
